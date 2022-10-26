@@ -1,0 +1,43 @@
+<mat-grid-list cols="5">
+  <mat-grid-tile [colspan]="2">
+    <mat-card class="min-width">
+      <mat-card-header>
+        <mat-card-title>Título</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam atque, nobis eos doloremque obcaecati blanditiis
+        a architecto nesciunt facilis ducimus minus? Nisi laudantium adipisci officia voluptatem mollitia voluptate,
+        tempora blanditiis.
+        <br/>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat vel voluptas repellat labore, cumque modi repudiandae adipisci temporibus assumenda maxime iure eaque ea deleniti laudantium maiores veniam illo iusto vitae.
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="3">
+    <mat-card class="min-width">
+        <mat-toolbar color="primary">
+          Login
+        </mat-toolbar>
+
+      <mat-card-content>
+        <form [formGroup]="form">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Usuário" formControlName="userName">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input type="password" matInput placeholder="Senha" formControlName="password">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions align="start">
+        <button mat-raised-button color="primary" (click)="onLogin()">Logar</button>
+
+        <button mat-raised-button (click)="onRegister()">Cadastrar-se</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
