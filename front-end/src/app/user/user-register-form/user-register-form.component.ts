@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { UserService } from '../service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-register-form',
@@ -10,7 +11,15 @@ import { UserService } from '../service/user.service';
 })
 export class UserRegisterFormComponent implements OnInit {
 
-  form = this.formBuilder.group({
+  form: UntypedFormGroup;
+
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private location: Location,
+    private service: UserService,
+    private snackBar: MatSnackBar
+  ) {
+  this.form = this.formBuilder.group({
     name: [''],
     lastName: [''],
     password: [''],
@@ -18,12 +27,7 @@ export class UserRegisterFormComponent implements OnInit {
     email: [''],
     phone: ['']
   });
-
-  constructor(
-    private formBuilder: NonNullableFormBuilder,
-    private location: Location,
-    private service: UserService
-  ) { }
+  }
 
   ngOnInit(): void {
     // TODO document why this method 'ngOnInit' is empty
@@ -31,11 +35,20 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   onRegister() {
-    // TODO cadastrar usuário
+    this.service.save(this.form.value)
+      .subscribe();
   }
 
   onCancel(): void {
     this.location.back();
   }
 
+  private onSuccess() {
+    this.snackBar.open('Usuário cadastrado!', '', { duration: 5000 });
+    //TODO: redirecionar para perfil de usuário.
+  }
+
+  private onError() {
+    this.snackBar.open('Erro ao tentar cadastrar.', '', { duration: 5000 });
+  }
 }
