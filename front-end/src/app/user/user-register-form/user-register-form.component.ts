@@ -36,7 +36,10 @@ export class UserRegisterFormComponent implements OnInit {
 
   onRegister() {
     this.service.save(this.form.value)
-      .subscribe();
+      .subscribe({
+          next: _ => this.onSuccess(),
+          error: _ => this.onError()
+    });
   }
 
   onCancel(): void {
