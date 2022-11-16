@@ -31,7 +31,9 @@ export class UserRegisterFormComponent implements OnInit {
         '',
         [Validators.required, Validators.maxLength(100), Validators.email],
       ],
-      phone: ['', [Validators.required, Validators.maxLength(100)]], //TODO: Criar pattern
+
+      phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"),
+      Validators.minLength(10), Validators.maxLength(11)]], //TODO: Criar pattern
     });
   }
 
