@@ -32,7 +32,7 @@
   </mat-card-content>
 
   <mat-card-actions align="start">
-    <button mat-raised-button color="primary" (click)="onRegister()">Cadastrar-se</button>
+    <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="onRegister()">Cadastrar-se</button>
 
     <button mat-raised-button (click)="onCancel()">Cancelar</button>
   </mat-card-actions>

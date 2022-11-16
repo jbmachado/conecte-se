@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 
@@ -11,8 +11,14 @@ import { UserService } from '../service/user.service';
 export class UserLoginFormComponent implements OnInit {
 
   form = this.formBuilder.group({
-    userName: [''],
-    password: ['']
+    userName: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]],
+    password: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]]
   })
 
   constructor(

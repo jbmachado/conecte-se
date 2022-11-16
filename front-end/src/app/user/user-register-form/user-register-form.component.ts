@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -20,12 +20,31 @@ export class UserRegisterFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
   this.form = this.formBuilder.group({
-    name: [''],
-    lastName: [''],
-    password: [''],
-    confPassword: [''],
-    email: [''],
-    phone: ['']
+    name: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]],
+    lastName: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]],
+    password: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]],
+    confPassword: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]],
+    email: ['', [
+      Validators.required,
+      Validators.maxLength(100),
+      Validators.email
+    ]],
+    phone: ['', [
+      Validators.required,
+      Validators.maxLength(100)
+    ]]
   });
   }
 
