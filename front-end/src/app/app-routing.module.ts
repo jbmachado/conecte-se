@@ -5,16 +5,19 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'user' },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'opp',
-    loadChildren: () => import('./opportunity/opportunity.module').then(m => m.OpportunityModule)
-  }
+    loadChildren: () =>
+      import('./opportunity/opportunity.module').then(
+        (m) => m.OpportunityModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

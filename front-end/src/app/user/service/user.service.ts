@@ -4,20 +4,18 @@ import { first, Observable } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private readonly API: string = 'usuario';
 
-  private readonly API: string = 'usuario'
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   // find(login: string): Observable<User> {
-     //TODO: Busca usuário na API
+  //TODO: Busca usuário na API
   // }
 
   save(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.API + '/salvar', user)
-      .pipe(first());
+    return this.httpClient.post<User>(this.API + '/salvar', user).pipe(first());
   }
 }

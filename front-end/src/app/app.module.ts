@@ -12,11 +12,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopBarComponent,
-    FooterBarComponent
-  ],
+  declarations: [AppComponent, TopBarComponent, FooterBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,9 +20,9 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     HttpClientModule,
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

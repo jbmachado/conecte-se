@@ -8,9 +8,8 @@ describe('OpportunityFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OpportunityFormComponent ]
-    })
-    .compileComponents();
+      declarations: [OpportunityFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OpportunityFormComponent);
     component = fixture.componentInstance;

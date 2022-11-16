@@ -5,11 +5,11 @@ import { UserRegisterFormComponent } from './user-register-form/user-register-fo
 
 const routes: Routes = [
   { path: '', component: UserLoginFormComponent },
-  { path: 'register', component: UserRegisterFormComponent }
+  { path: 'register', component: UserRegisterFormComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

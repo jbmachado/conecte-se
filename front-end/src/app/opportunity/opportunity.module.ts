@@ -7,17 +7,14 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [
-    OpportunityFormComponent
-  ],
+  declarations: [OpportunityFormComponent],
   imports: [
     CommonModule,
     OpportunityRoutingModule,
     AppMaterialModule,
     SharedModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class OpportunityModule { }
+export class OpportunityModule {}

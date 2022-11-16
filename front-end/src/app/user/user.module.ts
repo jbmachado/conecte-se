@@ -8,18 +8,14 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { UserRoutingModule } from './user-routing.module';
 
-
 @NgModule({
-  declarations: [
-    UserLoginFormComponent,
-    UserRegisterFormComponent
-  ],
+  declarations: [UserLoginFormComponent, UserRegisterFormComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     AppMaterialModule,
     SharedModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class UserModule { }
+export class UserModule {}

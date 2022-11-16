@@ -6,31 +6,23 @@ import { UserService } from '../service/user.service';
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.scss']
+  styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
-
   form = this.formBuilder.group({
-    userName: ['', [
-      Validators.required,
-      Validators.maxLength(100)
-    ]],
-    password: ['', [
-      Validators.required,
-      Validators.maxLength(100)
-    ]]
-  })
+    userName: ['', [Validators.required, Validators.maxLength(100)]],
+    password: ['', [Validators.required, Validators.maxLength(100)]],
+  });
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private service: UserService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // TODO document why this method 'ngOnInit' is empty
-
   }
 
   onLogin() {
