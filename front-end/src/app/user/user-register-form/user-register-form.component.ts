@@ -20,22 +20,18 @@ export class UserRegisterFormComponent implements OnInit {
     private service: UserService,
     private snackBar: MatSnackBar
   ) {
-    this.form = this.formBuilder.group(
-      {
-        email: [
-          '',
-          [Validators.required, Validators.email],
-        ],
-        phone: ['', [Validators.required, Validators.maxLength(12)]], //TODO: Criar pattern
-        name: ['', [Validators.required, Validators.maxLength(100)]],
-        lastName: ['', [Validators.required, Validators.maxLength(100)]],
-        password: ['', [Validators.required, Validators.maxLength(100)]],
-        confPassword: ['', [Validators.required, Validators.maxLength(100)]],
-      },
-      {
-        //alidators: [Validation.match('password', 'confirmPassword')], //TODO Validation
-      }
-    );
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      lastName: ['', [Validators.required, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
+      confPassword: ['', [Validators.required, Validators.maxLength(100)]], //TODO: Criar validator para ver se as senhas são as mesmas
+      email: [
+        '',
+        [Validators.required, Validators.maxLength(100), Validators.email],
+      ],
+      phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"),
+      Validators.minLength(10), Validators.maxLength(11)]], //TODO: Criar pattern
+    });
   }
 
   ngOnInit(): void {
