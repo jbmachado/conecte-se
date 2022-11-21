@@ -1,12 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  NonNullableFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
-import { UserService } from '../service/user.service';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-user-register-form',
@@ -14,7 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-register-form.component.scss'],
 })
 export class UserRegisterFormComponent implements OnInit {
-  form: UntypedFormGroup;
+  form: FormGroup;
+  submitted: boolean = false;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -22,24 +20,37 @@ export class UserRegisterFormComponent implements OnInit {
     private service: UserService,
     private snackBar: MatSnackBar
   ) {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      lastName: ['', [Validators.required, Validators.maxLength(100)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      confPassword: ['', [Validators.required, Validators.maxLength(100)]], //TODO: Criar validator para ver se as senhas são as mesmas
-      email: [
-        '',
-        [Validators.required, Validators.maxLength(100), Validators.email],
-      ],
-      phone: ['', [Validators.required, Validators.maxLength(100)]], //TODO: Criar pattern
-    });
+    this.form = this.formBuilder.group(
+      {
+        email: [
+          '',
+          [Validators.required, Validators.email],
+        ],
+        phone: ['', [Validators.required, Validators.maxLength(12)]], //TODO: Criar pattern
+        name: ['', [Validators.required, Validators.maxLength(100)]],
+        lastName: ['', [Validators.required, Validators.maxLength(100)]],
+        password: ['', [Validators.required, Validators.maxLength(100)]],
+        confPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      },
+      {
+        //alidators: [Validation.match('password', 'confirmPassword')], //TODO Validation
+      }
+    );
   }
 
   ngOnInit(): void {
     // TODO document why this method 'ngOnInit' is empty
   }
 
-  onRegister() {
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      this.snackBar.open('Dados inválidos!', 'Ok');
+      console.log('OI');
+      return;
+    }
+
     this.service.save(this.form.value).subscribe({
       next: (_) => this.onSuccess(),
       error: (_) => this.onError(),
@@ -47,7 +58,13 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   onCancel(): void {
+    this.submitted = false;
     this.location.back();
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.form.reset();
   }
 
   private onSuccess() {
