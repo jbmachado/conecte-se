@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from '../service/user.service';
+import Validation from './validator/validation';
 
 @Component({
   selector: 'app-user-register-form',
@@ -11,8 +12,7 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-register-form.component.scss'],
 })
 export class UserRegisterFormComponent implements OnInit {
-  form: FormGroup;
-  submitted: boolean = false;
+  form: UntypedFormGroup;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -31,7 +31,11 @@ export class UserRegisterFormComponent implements OnInit {
       ],
       phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"),
       Validators.minLength(10), Validators.maxLength(11)]], //TODO: Criar pattern
-    });
+    },
+    {
+      validators: [Validation.match('password', 'confPassword')]
+    }
+    );
   }
 
   ngOnInit(): void {
@@ -39,11 +43,8 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
     if (this.form.invalid) {
       this.snackBar.open('Dados inválidos!', 'Ok');
-      console.log('OI');
       return;
     }
 
@@ -54,12 +55,10 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.submitted = false;
     this.location.back();
   }
 
   onReset() {
-    this.submitted = false;
     this.form.reset();
   }
 
