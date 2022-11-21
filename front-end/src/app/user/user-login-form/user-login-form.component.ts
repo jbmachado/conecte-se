@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 
@@ -9,23 +9,25 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
-  form = this.formBuilder.group({
-    userEmail: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.maxLength(100)]],
-  });
+  form: UntypedFormGroup;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private service: UserService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.form = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.maxLength(100)]],
+  });
+}
 
   ngOnInit(): void {
     // TODO document why this method 'ngOnInit' is empty
   }
 
-  onLogin() {
+  onSubmit() {
     //TODO verificar login
   }
 
