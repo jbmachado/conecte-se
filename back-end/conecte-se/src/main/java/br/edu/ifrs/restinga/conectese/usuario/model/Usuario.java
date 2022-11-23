@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 
+import br.edu.ifrs.restinga.conectese.oportunidadeaceite.model.OportunidadeAceita;
 import br.edu.ifrs.restinga.conectese.perfil.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,9 @@ public class Usuario implements UserDetails {
     private LocalDateTime dataCriacao;
     private String telefone;
     private Boolean status;
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<OportunidadeAceita> oportunidadeAceitas;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfils;
     

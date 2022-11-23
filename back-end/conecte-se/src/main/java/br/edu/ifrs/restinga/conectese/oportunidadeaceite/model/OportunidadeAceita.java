@@ -1,7 +1,10 @@
-package br.edu.ifrs.restinga.conectese.oportunidade.model;
+package br.edu.ifrs.restinga.conectese.oportunidadeaceite.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 
+import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;
 import br.edu.ifrs.restinga.conectese.usuario.model.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,13 +15,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Imagem {
+public class OportunidadeAceita {
     
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-    private String Url;
-    
+    private Long id;
+    private LocalDateTime dataAceite;
+    @ManyToOne
+    private Usuario usuario;
     @ManyToOne
     private Oportunidade oportunidade;
 }

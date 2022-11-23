@@ -1,7 +1,6 @@
 package br.edu.ifrs.restinga.conectese.oportunidade.service;
 
 import java.util.List;
-import java.util.Objects;
 
 import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;
 import lombok.AllArgsConstructor;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class OportunidadeService {
     
     private final OportunidadeRepository oportunidadeRepository;
+    
     public Oportunidade salvarOportunidade(Oportunidade oportunidade) {
         return oportunidadeRepository.save(oportunidade);
     }
