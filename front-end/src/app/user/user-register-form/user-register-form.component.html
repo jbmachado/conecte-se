@@ -8,13 +8,13 @@
       <mat-form-field class="input-width">
         <mat-label>Email</mat-label>
 
-        <input type="email" matInput placeholder="Ex: pat@exemplo.com" formControlName="email">
+        <input type="email" matInput placeholder="Ex: pat@exemplo.com" formControlName="mail">
 
-        <mat-error *ngIf="form.controls['email'].errors?.['email']">
+        <mat-error *ngIf="form.controls['mail'].errors?.['mail']">
           Entre com um email valido
         </mat-error>
 
-        <mat-error *ngIf="form.controls['email'].errors?.['required']">
+        <mat-error *ngIf="form.controls['mail'].errors?.['required']">
           Campo obrigatório
         </mat-error>
       </mat-form-field>
@@ -22,13 +22,13 @@
       <mat-form-field class="input-width">
         <mat-label>Telefone</mat-label>
 
-        <input type="text" matInput placeholder="Ex: 51997812243" formControlName="phone">
+        <input type="text" matInput placeholder="Ex: 51997812243" formControlName="telefone">
 
-        <mat-error *ngIf="form.controls['phone'].errors?.['required']">
+        <mat-error *ngIf="form.controls['telefone'].errors?.['required']">
           Campo obrigatório
         </mat-error>
 
-        <mat-error *ngIf="form.controls['phone'].errors?.['pattern']">
+        <mat-error *ngIf="form.controls['telefone'].errors?.['pattern']">
           Digite somente números
         </mat-error>
       </mat-form-field>
@@ -36,9 +36,9 @@
       <mat-form-field class="input-width">
         <mat-label>Nome</mat-label>
 
-        <input matInput placeholder="Ex: João" formControlName="name">
+        <input matInput placeholder="Ex: João" formControlName="nome">
 
-        <mat-error *ngIf="form.controls['name'].errors?.['required']">
+        <mat-error *ngIf="form.controls['nome'].errors?.['required']">
           Campo obrigatório
         </mat-error>
       </mat-form-field>
@@ -46,9 +46,9 @@
       <mat-form-field class="input-width">
         <mat-label>Sobrenome</mat-label>
 
-        <input matInput placeholder="Ex: Silva" formControlName="lastName">
+        <input matInput placeholder="Ex: Silva" formControlName="sobrenome">
 
-        <mat-error *ngIf="form.controls['lastName'].errors?.['required']">
+        <mat-error *ngIf="form.controls['sobrenome'].errors?.['required']">
           Campo obrigatório
         </mat-error>
       </mat-form-field>
@@ -56,9 +56,9 @@
       <mat-form-field class="input-width">
         <mat-label>Senha</mat-label>
 
-        <input type="password" matInput placeholder="Senha" formControlName="password">
+        <input type="password" matInput placeholder="Senha" formControlName="senha">
 
-        <mat-error *ngIf="form.controls['password'].errors?.['required']">
+        <mat-error *ngIf="form.controls['senha'].errors?.['required']">
           Campo obrigatório
         </mat-error>
       </mat-form-field>
@@ -66,13 +66,13 @@
       <mat-form-field class="input-width">
         <mat-label>Confirmar Senha</mat-label>
 
-        <input type="password" matInput placeholder="Confirmar Senha" formControlName="confPassword">
+        <input type="password" matInput placeholder="Confirmar Senha" formControlName="confSenha">
 
-        <mat-error *ngIf="form.controls['confPassword'].errors?.['required']">
+        <mat-error *ngIf="form.controls['confSenha'].errors?.['required']">
           Campo obrigatório
         </mat-error>
 
-        <mat-error *ngIf="form.controls['confPassword'].errors?.['matching']">
+        <mat-error *ngIf="form.controls['confSenha'].errors?.['matching']">
           Campo inválido
         </mat-error>
       </mat-form-field>

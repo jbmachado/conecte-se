@@ -15,7 +15,8 @@ export class UserService {
   //TODO: Busca usuário na API
   // }
 
-  save(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.API + '/salvar', user).pipe(first());
+  save(user: Partial<User>): Observable<User> {
+    return this.httpClient.post<User>(this.API + '/salvar', user)
+      .pipe(first());
   }
 }
