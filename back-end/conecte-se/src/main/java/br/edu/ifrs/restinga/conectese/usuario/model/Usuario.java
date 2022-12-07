@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import br.edu.ifrs.restinga.conectese.oportunidadeaceite.model.OportunidadeAceita;
-import br.edu.ifrs.restinga.conectese.perfil.Perfil;
+import br.edu.ifrs.restinga.conectese.perfil.model.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
