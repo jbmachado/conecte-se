@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-toolbar color="primary">
+    Cadastro
+  </mat-toolbar>
+
+  <mat-card-content>
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field class="input-width">
+        <mat-label>Email</mat-label>
+
+        <input type="email" matInput placeholder="Ex: pat@exemplo.com" formControlName="mail">
+
+        <mat-error *ngIf="form.controls['mail'].errors?.['mail']">
+          Entre com um email valido
+        </mat-error>
+
+        <mat-error *ngIf="form.controls['mail'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-width">
+        <mat-label>Telefone</mat-label>
+
+        <input type="text" matInput placeholder="Ex: 51997812243" formControlName="telefone">
+
+        <mat-error *ngIf="form.controls['telefone'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+
+        <mat-error *ngIf="form.controls['telefone'].errors?.['pattern']">
+          Digite somente números
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-width">
+        <mat-label>Nome</mat-label>
+
+        <input matInput placeholder="Ex: João" formControlName="nome">
+
+        <mat-error *ngIf="form.controls['nome'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-width">
+        <mat-label>Sobrenome</mat-label>
+
+        <input matInput placeholder="Ex: Silva" formControlName="sobrenome">
+
+        <mat-error *ngIf="form.controls['sobrenome'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-width">
+        <mat-label>Senha</mat-label>
+
+        <input type="password" matInput placeholder="Senha" formControlName="senha">
+
+        <mat-error *ngIf="form.controls['senha'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-width">
+        <mat-label>Confirmar Senha</mat-label>
+
+        <input type="password" matInput placeholder="Confirmar Senha" formControlName="confSenha">
+
+        <mat-error *ngIf="form.controls['confSenha'].errors?.['required']">
+          Campo obrigatório
+        </mat-error>
+
+        <mat-error *ngIf="form.controls['confSenha'].errors?.['matching']">
+          Campo inválido
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions align="start">
+    <button mat-raised-button color="primary" (click)="onSubmit()">Cadastrar-se</button>
+
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+</mat-card>

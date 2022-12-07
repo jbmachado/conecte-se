@@ -1,0 +1,56 @@
+<mat-grid-list cols="5">
+  <mat-grid-tile [colspan]="2">
+    <mat-card class="min-width">
+      <mat-card-header>
+        <mat-card-title class="titulo">Conecte-se</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="textoDescricao">
+        <br>
+        Conectando quem oferece a quem procura uma oportunidade!!
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="3">
+    <mat-card class="min-width">
+      <mat-toolbar color="primary">
+        Login
+      </mat-toolbar>
+
+      <mat-card-content>
+        <form [formGroup]="form">
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+
+            <input matInput placeholder="Ex: pat@examplo.com" formControlName="email">
+
+            <mat-error *ngIf="form.controls['email'].errors?.['email']">
+              Entre com um email valido
+            </mat-error>
+
+            <mat-error *ngIf="form.controls['email'].errors?.['required']">
+              Campo obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Senha</mat-label>
+
+            <input type="password" matInput placeholder="Senha" formControlName="password">
+
+            <mat-error *ngIf="form.controls['password'].errors?.['required']">
+              Campo obrigatório
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions align="start">
+        <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="onSubmit()">Logar</button>
+
+        <button mat-raised-button (click)="onRegister()">Cadastrar-se</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
