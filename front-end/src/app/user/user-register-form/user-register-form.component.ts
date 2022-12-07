@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
+import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from '../service/user.service';
-import Validation from './validator/validation';
+import Validation from './util/validation';
 
 @Component({
   selector: 'app-user-register-form',
@@ -20,21 +20,29 @@ export class UserRegisterFormComponent implements OnInit {
     private service: UserService,
     private snackBar: MatSnackBar
   ) {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      lastName: ['', [Validators.required, Validators.maxLength(100)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      confPassword: ['', [Validators.required, Validators.maxLength(100)]], //TODO: Criar validator para ver se as senhas são as mesmas
-      email: [
-        '',
-        [Validators.required, Validators.maxLength(100), Validators.email],
-      ],
-      phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"),
-      Validators.minLength(10), Validators.maxLength(11)]], //TODO: Criar pattern
-    },
-    {
-      validators: [Validation.match('password', 'confPassword')]
-    }
+    this.form = this.formBuilder.group(
+      {
+        mail: [
+          '',
+          [Validators.required, Validators.maxLength(100), Validators.email],
+        ],
+        telefone: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[0-9]*$'),
+            Validators.minLength(10),
+            Validators.maxLength(11),
+          ],
+        ],
+        nome: ['', [Validators.required, Validators.maxLength(100)]],
+        sobrenome: ['', [Validators.required, Validators.maxLength(100)]],
+        senha: ['', [Validators.required, Validators.maxLength(100)]],
+        confSenha: ['', [Validators.required, Validators.maxLength(100)]],
+      },
+      {
+        validators: [Validation.match('senha', 'confSenha')],
+      }
     );
   }
 
@@ -49,7 +57,10 @@ export class UserRegisterFormComponent implements OnInit {
     }
 
     this.service.save(this.form.value).subscribe({
-      next: (_) => this.onSuccess(),
+      next: (_) => {
+        this.onSuccess();
+        //TODO: redirecionar para perfil de usuário.
+      },
       error: (_) => this.onError(),
     });
   }
@@ -58,13 +69,8 @@ export class UserRegisterFormComponent implements OnInit {
     this.location.back();
   }
 
-  onReset() {
-    this.form.reset();
-  }
-
   private onSuccess() {
     this.snackBar.open('Usuário cadastrado!', 'Ok', { duration: 5000 });
-    //TODO: redirecionar para perfil de usuário.
   }
 
   private onError() {
