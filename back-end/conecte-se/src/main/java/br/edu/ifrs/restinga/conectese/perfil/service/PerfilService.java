@@ -19,7 +19,7 @@ public class PerfilService {
     }
     
     public ResponseEntity<Perfil> buscarPorNome(String nome) {
-        var perfil = perfilRepository.findByName(nome);
+        var perfil = perfilRepository.findByNome(nome);
         
         if (perfil.isPresent()) {
             return ResponseEntity.ok(perfil.get());
