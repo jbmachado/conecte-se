@@ -27,8 +27,8 @@ export class UserLoginFormComponent implements OnInit {
     // TODO document why this method 'ngOnInit' is empty
   }
 
-  onSubmit() {
-    //TODO verificar login
+  onLogin() {
+    //TODO login
   }
 
   onRegister() {

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { first, Observable } from 'rxjs';
 import { User } from '../model/user';
 
+//TODO TOKEN - import * as jwt_decode from "jwt-decode";
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,12 +13,9 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // find(login: string): Observable<User> {
-  //TODO: Busca usuário na API
-  // }
+  //TODO admin
 
-  save(user: Partial<User>): Observable<User> {
-    return this.httpClient.post<User>(this.API + '/salvar', user)
-      .pipe(first());
-  }
+  //TODO moderador
+
+  //TODO usuário comum
 }

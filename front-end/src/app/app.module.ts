@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
+// import { authInterceptorProviders } from './helpers/auth.interceptor';
+
 @NgModule({
   declarations: [AppComponent, TopBarComponent, FooterBarComponent],
   imports: [
@@ -24,7 +26,7 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     MatMenuModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ /*authInterceptorProviders*/ ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../service/auth.service';
 
 import { UserService } from '../service/user.service';
 import Validation from './util/validation';
@@ -17,7 +18,7 @@ export class UserRegisterFormComponent implements OnInit {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private location: Location,
-    private service: UserService,
+    private authService: AuthService,
     private snackBar: MatSnackBar
   ) {
     this.form = this.formBuilder.group(
@@ -56,10 +57,10 @@ export class UserRegisterFormComponent implements OnInit {
       return;
     }
 
-    this.service.save(this.form.value).subscribe({
+    this.authService.register(this.form.value).subscribe({
       next: (_) => {
         this.onSuccess();
-        //TODO: redirecionar para perfil de usuário.
+        // TODO redirecionar para perfil de usuário.
       },
       error: (_) => this.onError(),
     });
