@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../service/user.service';
+import { AuthService } from '../service/auth.service';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-user-login-form',
@@ -10,25 +15,45 @@ import { UserService } from '../service/user.service';
 })
 export class UserLoginFormComponent implements OnInit {
   form: UntypedFormGroup;
+  isLoggedIn = false;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private service: UserService,
+    private token: TokenService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.maxLength(100)]],
-  });
-}
-
-  ngOnInit(): void {
-    // TODO document why this method 'ngOnInit' is empty
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
+    });
   }
 
-  onLogin() {
-    //TODO login
+  ngOnInit(): void {
+    if (this.token.getToken()) {
+      // Usuário está logado!!!
+      this.isLoggedIn = true;
+      //TODO redirecionar para perfil do usuário.
+    }
+  }
+
+  onSubmit() {
+    //TODO ver possibilidade de back retornar dados do usuário. Talvez um getUser.
+    const user = this.form.value;
+
+    this.authService.login(user).subscribe({
+      next: (data) => {
+        this.token.saveToken(data.token);
+        this.token.saveUser(user);
+
+        this.isLoggedIn = true;
+        window.location.reload(); //TODO trocar para perfil.
+      },
+      error: (err) => {
+        console.log(err); //TODO mensagem de erro
+      },
+    });
   }
 
   onRegister() {

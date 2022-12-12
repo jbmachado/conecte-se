@@ -58,7 +58,8 @@ export class UserRegisterFormComponent implements OnInit {
     }
 
     this.authService.register(this.form.value).subscribe({
-      next: (_) => {
+      next: (user) => {
+        console.log(user)
         this.onSuccess();
         // TODO redirecionar para perfil de usuário.
       },
