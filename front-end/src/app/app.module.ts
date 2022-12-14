@@ -13,6 +13,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 import { authInterceptorProviders } from './user/help/auth.interceptor';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, TopBarComponent, FooterBarComponent],
@@ -24,6 +25,7 @@ import { authInterceptorProviders } from './user/help/auth.interceptor';
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
+    MatIconModule,
     ReactiveFormsModule
   ],
   providers: [authInterceptorProviders],
