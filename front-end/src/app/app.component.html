@@ -1,5 +1,30 @@
-<app-top-bar></app-top-bar>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon class="mat-18">
+         {{ isMenuOpen ? 'menu_open' : 'menu' }}
+        </mat-icon>
+      </button>
+      <a class="toolbar-router" [routerLink]="'/'">CONECTE-SE</a>
+    </mat-toolbar-row>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container class="sidenav-container"><!-- TODO adicionar itens para navegação -->
+    <mat-sidenav #sidenav class="sidenav" mode="over" align="start" [(opened)]="isMenuOpen" (click)="onSidenavClick()">
+      <mat-nav-list>
+        <mat-list-item>
+          <a class="router" [routerLink]="'/user/register'">Cadastrar-se</a>
+        </mat-list-item>
 
-<app-footer-bar></app-footer-bar>
+        <mat-list-item>
+          <a class="router" [routerLink]="'/user'">Login</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="content" style="height: 90.15vh;">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
