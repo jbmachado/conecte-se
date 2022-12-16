@@ -13,17 +13,34 @@
     <mat-sidenav #sidenav class="sidenav" mode="over" align="start" [(opened)]="isMenuOpen" (click)="onSidenavClick()">
       <mat-nav-list>
         <mat-list-item>
-          <a class="router" [routerLink]="'/user/register'">Cadastrar-se</a>
+          <a class="router" [routerLink]="'/'">
+            <mat-icon class="mat-18">home</mat-icon>
+            <span>Home</span>
+          </a>
         </mat-list-item>
 
+        <mat-divider></mat-divider>
+
         <mat-list-item>
-          <a class="router" [routerLink]="'/user'">Login</a>
+          <a class="router" [routerLink]="'/user/register'">
+            <mat-icon class="mat-18">assignment</mat-icon>
+            <span>Cadastrar-se</span>
+          </a>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item>
+          <a class="router" [routerLink]="'/user'">
+            <mat-icon class="mat-18">login</mat-icon>
+            <span>Login</span>
+          </a>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <div class="content" style="height: 90.15vh;">
+      <div class="content">
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
