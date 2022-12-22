@@ -4,23 +4,13 @@ mat-card {
   text-align: justify;
 }
 
+.titulo {
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+
 .full-width {
   width: 100%;
   margin-top: .5em;
   margin-right: 1em;
-}
-
-.min-width {
-  width: 100%;
-  min-width: 450px;
-}
-
-@media screen and (max-width: 1380px) {}
-
-.titulo {
-  font-size: 50px;
-}
-
-.textoDescricao {
-  font-size: 20px;
 }

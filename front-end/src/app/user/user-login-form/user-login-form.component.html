@@ -1,19 +1,18 @@
-<mat-grid-list cols="5">
-  <mat-grid-tile [colspan]="2">
-    <mat-card class="min-width">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row wrap" fxLayout.lt-md="column" fxFill fxLayoutAlign="center start">
+    <mat-card fxFlex.lt-md="65" fxFlex="30">
       <mat-card-header>
         <mat-card-title class="titulo">Conecte-se</mat-card-title>
       </mat-card-header>
 
       <mat-card-content class="textoDescricao">
-        <br>
-        Conectando quem oferece a quem procura uma oportunidade!!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, reprehenderit,
+        ipsa dolor cum repudiandae cupiditate incidunt minus beatae reiciendis voluptate at,
+         voluptas quibusdam eos placeat dolores sint est! Molestias, architecto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus beatae nisi aperiam inventore perferendis rerum totam voluptatibus illo soluta molestias necessitatibus asperiores, eos eius distinctio natus sit atque? Omnis, repellendus.
       </mat-card-content>
     </mat-card>
-  </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="3">
-    <mat-card class="min-width">
+    <mat-card fxFlex.lt-md="100" fxFlex="35">
       <mat-toolbar color="primary">
         Login
       </mat-toolbar>
@@ -52,5 +51,5 @@
         <button mat-raised-button (click)="onRegister()">Cadastrar-se</button>
       </mat-card-actions>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
