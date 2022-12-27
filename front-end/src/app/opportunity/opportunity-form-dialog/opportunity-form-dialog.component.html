@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Criar oportunidade</h1>
+
+<div mat-card-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+
+      <input matInput placeholder="Ex: Recepcionista" formControlName="title">
+      <mat-error *ngIf="form.controls['title'].errors?.['required']">
+        Campo obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descrição</mat-label>
+
+      <input matInput placeholder="Ex: Horário das 10h às 18h, Rua dos Ratos, n° 33"><!--TODO Trocar por textarea-->
+      <mat-error *ngIf="form.controls['description'].errors?.['required']">
+        Campo obrigatório
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onRegister()">Criar</button>
+  <button mat-raised-button (click)="onCancel()">Cancelar</button>
+</div>
