@@ -14,7 +14,7 @@
     <mat-form-field>
       <mat-label>Descrição</mat-label>
 
-      <textarea #description rows="5" maxlength="256" matInput placeholder="Ex: Horário das 10h às 18h, Rua dos Ratos, n° 33" formControlName="description"></textarea>
+      <textarea #description rows="5" maxlength="256" style="max-height: 400px;" matInput placeholder="Ex: Horário das 10h às 18h, Rua dos Ratos, n° 33" formControlName="description"></textarea>
       <mat-hint align="end">{{ description.value.length }} / 256</mat-hint>
       <mat-error *ngIf="form.controls['description'].errors?.['required']">
         Campo obrigatório

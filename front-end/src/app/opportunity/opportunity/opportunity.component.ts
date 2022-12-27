@@ -20,12 +20,13 @@ export class OpportunityComponent implements OnInit {
 
   addOpportunity() {
     const dialogRef = this.dialog.open(OpportunityFormDialogComponent, {
-      minWidth: '500px'
+      minWidth: '500px',
+      maxHeight: '1000px'
     });
 
     dialogRef.afterClosed().subscribe({
       next: (_) => {
-        window.location.reload();
+        // window.location.reload();
       },
       error: (err) => {
         console.log(err);
