@@ -13,7 +13,10 @@ export class OpportunityFormDialogComponent implements OnInit {
 
   form = this.formBuilder.group({
     title: ['', [Validators.required]],
-    description: ['', [Validators.required]]
+    description: ['', [
+      Validators.required,
+      Validators.maxLength(256)
+    ]]
   });
 
   constructor(
