@@ -1,5 +1,6 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,8 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   exports: [
@@ -31,9 +32,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSnackBarModule,
     MatRadioModule,
     MatGridListModule,
-    TextFieldModule,
     MatSidenavModule,
-    FlexLayoutModule
+    MatTabsModule,
+    TextFieldModule,
+    FlexLayoutModule,
   ],
 })
 export class AppMaterialModule {}
