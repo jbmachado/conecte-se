@@ -16,7 +16,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   exports: [
@@ -37,6 +39,8 @@ import { MatDialog } from '@angular/material/dialog';
     MatTabsModule,
     TextFieldModule,
     FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class AppMaterialModule {}

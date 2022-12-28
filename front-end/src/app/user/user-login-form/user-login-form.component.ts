@@ -25,14 +25,14 @@ export class UserLoginFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
+      mail: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.maxLength(100)]],
     });
   }
 
   ngOnInit(): void {
     if (this.token.getToken()) {
-      // Usuário está logado!!!
+      //Usuário está logado!!!
       this.isLoggedIn = true;
       //TODO redirecionar para perfil do usuário.
     }

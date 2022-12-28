@@ -36,5 +36,4 @@ public class Oportunidade {
     
     @OneToMany(mappedBy = "oportunidade", cascade = CascadeType.ALL)
     private  List<OportunidadeAceita> oportunidadeAceitas;
-    
 }
