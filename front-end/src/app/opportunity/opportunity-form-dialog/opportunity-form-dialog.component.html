@@ -1,4 +1,6 @@
-<h1 mat-dialog-title>Oportunidade</h1>
+<mat-toolbar mat-dialog-title color="primary" fxLayout="row wrap">
+  <span>Oportunidade</span>
+</mat-toolbar>
 
 <div mat-card-content style="max-width: 500px;">
   <form [formGroup]="form">
@@ -7,6 +9,7 @@
         <mat-label>Título</mat-label>
 
         <input matInput placeholder="Ex: Recepcionista" formControlName="titulo">
+
         <mat-error *ngIf="form.controls['titulo'].errors?.['required']">
           Campo obrigatório
         </mat-error>
@@ -16,6 +19,7 @@
         <mat-label>Endereço</mat-label>
 
         <input matInput placeholder="Ex: Rua Alberto, n° 33" formControlName="endereco" />
+
         <mat-error *ngIf="form.controls['endereco'].errors?.['required']">
           Campo obrigatório
         </mat-error>
@@ -26,17 +30,26 @@
       <mat-form-field fxFlex="55">
         <mat-label>Telefone</mat-label>
 
-        <input matInput placeholder="Ex: 51998334454" formControlName="telefone" />
+        <input matNativeControl matInput type="number" placeholder="Ex: 51998334454" formControlName="telefone" />
+
         <mat-error *ngIf="form.controls['telefone'].errors?.['pattern']">
           Telefone inválido
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="35">
-        <mat-label>Valor(R$)</mat-label>
+      <mat-form-field fxFlex="40" floatLabel="always">
+        <mat-label>Valor</mat-label>
 
-        <input matInput placeholder="Ex: 150,22" formControlName="valor" />
+        <span matPrefix>R$ &nbsp;</span>
+
+        <input matInput type="number" maxlength="9" placeholder="Ex: 150,22" formControlName="valor"/>
+
+
         <mat-error *ngIf="form.controls['valor'].errors?.['pattern']">
+          Valor inválido
+        </mat-error>
+
+        <mat-error *ngIf="form.controls['valor'].errors?.['maxLength']">
           Valor inválido
         </mat-error>
       </mat-form-field>
@@ -48,20 +61,25 @@
         <mat-label>Validade</mat-label>
 
         <input matInput placeholder="" [matDatepicker]="picker" formControlName="validade" />
+
         <mat-hint>MM/DD/YYYY</mat-hint>
+
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
         <mat-datepicker #picker>
           <mat-datepicker-actions>
             <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+
             <button mat-raised-button matDatepickerCancel>Cancelar</button>
           </mat-datepicker-actions>
         </mat-datepicker>
+
         <mat-error *ngIf="form.controls['validade'].errors?.['required']">
           Campo obrigatório
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="35">
+      <mat-form-field fxFlex="40">
         <mat-label>Categoria</mat-label>
 
         <input matInput placeholder="" formControlName="categoria" />
@@ -74,10 +92,13 @@
 
         <textarea #description rows="9" maxlength="500" style="max-height: 400px;" matInput
           placeholder="Ex: Horário das 10h às 18h." formControlName="descricao"></textarea>
+
         <mat-hint align="end">{{ description.value.length }} / 500</mat-hint>
+
         <mat-error *ngIf="form.controls['descricao'].errors?.['required']">
           Campo obrigatório
         </mat-error>
+
         <mat-error *ngIf="form.controls['descricao'].errors?.['maxLength']">
           Campo não pode passar de 500 caracteres
         </mat-error>

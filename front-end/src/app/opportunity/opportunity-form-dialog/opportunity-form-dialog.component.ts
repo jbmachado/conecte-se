@@ -19,14 +19,17 @@ export class OpportunityFormDialogComponent implements OnInit {
       Validators.required,
       Validators.maxLength(500)
     ]],
-    dataCriacao: ['', [Validators.required]],
+    // dataCriacao: ['', [Validators.required]], //TODO ver melhor forma de usar campo
     endereco: ['', [Validators.required]],
     telefone: ['', [
       Validators.pattern('^[0-9]*$'),
       Validators.minLength(10),
       Validators.maxLength(11)
     ]],
-    valor: ['', [Validators.pattern('^([0-9]{1,3}(\.[0-9]{3})*|[0-9]+)(\,[0-9]{2})?$')]],
+    valor: ['', [
+      Validators.pattern('^([0-9]{1,3}(\.[0-9]{3})*|[0-9]+)(\,[0-9]{2})?$'),
+      Validators.maxLength(9)
+    ]],
     validade: ['', Validators.required],
     categoria: ['']
   });
@@ -54,6 +57,7 @@ export class OpportunityFormDialogComponent implements OnInit {
       next: (opp) => {
         console.log(opp)
         this.onSuccess();
+        this.dialogRef.close();
       },
       error: (err) => {
         console.log(err);
