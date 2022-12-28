@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OpportunityService } from '../service/opportunity.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class OpportunityFormDialogComponent implements OnInit {
     titulo: ['', [Validators.required]],
     descricao: ['', [
       Validators.required,
-      Validators.maxLength(256)
+      Validators.maxLength(500)
     ]],
     dataCriacao: ['', [Validators.required]],
     endereco: ['', [Validators.required]],
@@ -34,7 +35,8 @@ export class OpportunityFormDialogComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private location: Location,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<OpportunityFormDialogComponent>,
+    private dialogRef: MatDialogRef<OpportunityFormDialogComponent>,
+    private service: OpportunityService,
   ) { }
 
   ngOnInit(): void {
@@ -47,10 +49,28 @@ export class OpportunityFormDialogComponent implements OnInit {
       this.snackBar.open('Dados inválidos!', 'Ok');
       return;
     }
-    //TODO cadastro opp
+
+    this.service.register(this.form.value).subscribe({
+      next: (opp) => {
+        console.log(opp)
+        this.onSuccess();
+      },
+      error: (err) => {
+        console.log(err);
+        this.onError();
+      }
+    })
   }
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  private onSuccess() {
+    this.snackBar.open('Oportunidade cadastrada!', 'Ok', { duration: 5000 });
+  }
+
+  private onError() {
+    this.snackBar.open('Erro ao tentar cadastrar.', 'Ok', { duration: 5000 });
   }
 }

@@ -2,7 +2,7 @@ import { User } from '../../user/model/user';
 export interface Opportunity {
   //TODO lista de imagem
   //TODO oportunidade aceitas
-  _id: number;
+  id: number;
   criador: User;
   titulo: string;
   descricao: string;
