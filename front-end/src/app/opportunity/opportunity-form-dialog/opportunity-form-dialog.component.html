@@ -60,7 +60,7 @@
         <!--TODO trocar formato de data para DD/MM/YYYY-->
         <mat-label>Validade</mat-label>
 
-        <input matInput placeholder="" [matDatepicker]="picker" formControlName="validade" />
+        <input [max]="maxDate" [min]="minDate" matInput placeholder="" [matDatepicker]="picker" formControlName="validade" />
 
         <mat-hint>MM/DD/YYYY</mat-hint>
 

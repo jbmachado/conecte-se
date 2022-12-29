@@ -20,7 +20,7 @@ export class OpportunityComponent implements OnInit {
 
   addOpportunity() {
     const dialogRef = this.dialog.open(OpportunityFormDialogComponent, {
-      minWidth: '500px',
+      minWidth: '450px',
       maxHeight: '1000px'
     });
 

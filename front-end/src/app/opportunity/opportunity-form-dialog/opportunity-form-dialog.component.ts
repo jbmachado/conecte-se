@@ -12,6 +12,8 @@ import { OpportunityService } from '../service/opportunity.service';
   styleUrls: ['./opportunity-form-dialog.component.scss']
 })
 export class OpportunityFormDialogComponent implements OnInit {
+  minDate?: Date | null = null;
+  maxDate?: Date | null = null;
 
   form = this.formBuilder.group({
     titulo: ['', [Validators.required]],
@@ -43,8 +45,10 @@ export class OpportunityFormDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // TODO document why this method 'ngOnInit' is empty
+    const currentYear = new Date().getFullYear();
 
+    this.minDate = new Date(currentYear - 10, 0, 1); // 10 anos antes o atual, 01 de Janeiro.
+    this.maxDate = new Date(currentYear + 10, 11, 31); // 10 anos após o atual, 31 de Dezembro.
   }
 
   onRegister() {
