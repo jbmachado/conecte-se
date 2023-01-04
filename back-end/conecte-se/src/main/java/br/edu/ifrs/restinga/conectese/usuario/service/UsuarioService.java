@@ -19,7 +19,6 @@ public class UsuarioService {
     private final PerfilService perfilService;
     
     public Usuario salvarUsuario(Usuario usuario) {
-
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getPassword()));
         var perfil = perfilService.buscarPorNome("usuario");
         if (!Objects.isNull(perfil.getBody())) {
