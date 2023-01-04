@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -27,6 +28,7 @@ import { authInterceptorProviders } from './user/help/auth.interceptor';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatDividerModule,
     ReactiveFormsModule
   ],
   providers: [authInterceptorProviders],

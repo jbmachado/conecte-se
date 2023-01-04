@@ -1,5 +1,15 @@
+import { User } from '../../user/model/user';
 export interface Opportunity {
-  _id: number;
-  title: string;
-  description: string;
+  //TODO lista de imagem
+  //TODO oportunidade aceitas
+  id: number;
+  criador: User;
+  titulo: string;
+  descricao: string;
+  dataCriacao: string;
+  endereco: string;
+  telefone: string;
+  valor: string;
+  validade: string;
+  categoria: string;
 }

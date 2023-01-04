@@ -22,7 +22,7 @@
       <mat-form-field class="input-width">
         <mat-label>Telefone</mat-label>
 
-        <input type="text" matInput placeholder="Ex: 51997812243" formControlName="telefone">
+        <input type="number" matInput placeholder="Ex: 51997812243" formControlName="telefone">
 
         <mat-error *ngIf="form.controls['telefone'].errors?.['required']">
           Campo obrigatório
