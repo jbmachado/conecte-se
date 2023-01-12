@@ -9,7 +9,7 @@ import { User } from '../model/user';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly API: string = 'usuario';
+  private readonly API: string = '/api';
 
   constructor(private httpClient: HttpClient) {}
 

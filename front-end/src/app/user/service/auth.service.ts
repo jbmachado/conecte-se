@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, first } from 'rxjs';
 import { User } from '../model/user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Token } from '../model/token';
 
 @Injectable({
@@ -10,20 +10,17 @@ import { Token } from '../model/token';
 
 export class AuthService {
 
-  private readonly API: string = '';
-  private readonly httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'applications/json' })
-  };
+  private readonly API: string = '/api';
 
   constructor(private http: HttpClient) { }
 
   login(user: Partial<User>): Observable<Token> {
-    return this.http.post<Token>(this.API + 'auth', user, this.httpOptions)
+    return this.http.post<Token>(this.API + '/auth', user)
       .pipe(first());
   }
 
   register(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(this.API + 'usuario/salvar', user, this.httpOptions)
+    return this.http.post<User>(this.API + '/usuario/salvar', user)
       .pipe(first());
   }
 }

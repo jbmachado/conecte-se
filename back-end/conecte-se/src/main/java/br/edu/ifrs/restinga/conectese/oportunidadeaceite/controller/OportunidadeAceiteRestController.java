@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/oportunidadeaceite")
+@RequestMapping(value = "/api/oportunidadeaceite")
 public class OportunidadeAceiteRestController {
     
     private OportunidadeAceiteService service;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/perfil")
+@RequestMapping(value = "/api/perfil")
 public class PerfilRestController {
     
     private final PerfilService perfilService;

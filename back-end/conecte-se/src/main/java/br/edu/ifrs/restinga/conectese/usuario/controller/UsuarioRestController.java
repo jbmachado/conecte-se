@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/api/usuario")
 public class UsuarioRestController {
     
     private final UsuarioService service;
