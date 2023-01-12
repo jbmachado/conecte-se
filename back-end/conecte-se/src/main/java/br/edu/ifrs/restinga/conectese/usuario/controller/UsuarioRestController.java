@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/api/usuario")
@@ -15,7 +14,7 @@ public class UsuarioRestController {
     private final UsuarioService service;
     
     @PostMapping(value = "/salvar")
-    public Usuario salvarUsuario(
+    public ResponseEntity<Usuario> salvarUsuario(
         @RequestBody
         @Validated
         Usuario usuario) {

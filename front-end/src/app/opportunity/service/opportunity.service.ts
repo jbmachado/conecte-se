@@ -7,7 +7,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OpportunityService {
-  private readonly API: string = 'oportunidade';
+  private readonly API: string = '';
   private readonly httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'applications/json' })
   };
@@ -15,7 +15,7 @@ export class OpportunityService {
   constructor(private http: HttpClient) { /* TODO document why this constructor is empty */  }
 
   register(opp: Partial<Opportunity>): Observable<Opportunity> {
-    return this.http.post<Opportunity>(this.API + '/salvar', opp, this.httpOptions)
+    return this.http.post<Opportunity>(this.API + 'oportunidade/salvar', opp)
       .pipe(first());
   }
 }
