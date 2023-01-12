@@ -3,7 +3,7 @@ export interface Opportunity {
   //TODO lista de imagem
   //TODO oportunidade aceitas
   id: number;
-  criador: User;
+  criador: User | null;
   titulo: string;
   descricao: string;
   dataCriacao: string;
