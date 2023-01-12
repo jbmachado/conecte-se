@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -19,7 +20,8 @@ export class UserRegisterFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private location: Location,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.form = this.formBuilder.group(
       {
@@ -61,7 +63,7 @@ export class UserRegisterFormComponent implements OnInit {
       next: (user) => {
         console.log(user);
         this.onSuccess();
-        // TODO redirecionar para perfil de usuário.
+        this.router.navigate(["/user"]);
       },
       error: (err) => {
         console.log(err);
