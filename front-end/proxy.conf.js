@@ -1,6 +1,7 @@
 const PROXY_CONFIG=[
   {
-    context: ['/usuario'],
+    context: ['/usuario',
+  '/oportunidade'],
     target: 'http://localhost:8080',
     secure: false,
     loglevel: 'debug'
