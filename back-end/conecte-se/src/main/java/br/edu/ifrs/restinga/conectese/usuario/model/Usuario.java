@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import br.edu.ifrs.restinga.conectese.oportunidadeaceite.model.OportunidadeAceita;
 import br.edu.ifrs.restinga.conectese.perfil.model.Perfil;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
