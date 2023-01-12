@@ -10,7 +10,7 @@ import { Token } from '../model/token';
 
 export class AuthService {
 
-  private readonly API: string = '';
+  private readonly API = '';
   private readonly httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'applications/json' })
   };
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   register(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(this.API + 'usuario/salvar', user, this.httpOptions)
+    return this.http.post<User>(this.API + 'usuario/salvar', user)
       .pipe(first());
   }
 }
