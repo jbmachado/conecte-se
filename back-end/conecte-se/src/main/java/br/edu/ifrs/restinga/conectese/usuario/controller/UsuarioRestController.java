@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/api/usuario")
+@RequestMapping(value = "/usuario")
 public class UsuarioRestController {
     
     private final UsuarioService service;

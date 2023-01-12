@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/api/oportunidade")
+@RequestMapping(value = "/oportunidade")
 public class OportunidadeRestController {
     
     private final OportunidadeService service;
