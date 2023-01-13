@@ -4,7 +4,7 @@
       <mat-tab label="Oportunidades">
         <!--TODO carregar oportunidades-->
       </mat-tab>
-      <mat-tab label="Minhas Oportunidades">
+      <mat-tab label="Minhas Oportunidades" *ngIf="isLogged">
         <!--TODO mostrar minhas oportunidades apenas quando usuário estiver logado-->
         <!--TODO mostrar campo apenas se usuário estiver logado-->
         <!--TODO carregar oportunidades do usuário logado-->
@@ -12,7 +12,7 @@
     </mat-tab-group>
   </div>
 
-  <div fxLayoutAlign="end end">
+  <div fxLayoutAlign="end end" *ngIf="isLogged">
     <button mat-mini-fab color="warn" (click)="addOpportunity()">
       <mat-icon>add</mat-icon>
     </button>

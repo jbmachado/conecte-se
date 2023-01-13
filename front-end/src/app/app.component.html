@@ -21,7 +21,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item>
+        <mat-list-item *ngIf="!isLogged">
           <a class="router" [routerLink]="'/user/register'">
             <mat-icon class="mat-18">assignment</mat-icon>
             <span>Cadastrar-se</span>
@@ -30,7 +30,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item>
+        <mat-list-item *ngIf="!isLogged">
           <a class="router" [routerLink]="'/user'">
             <mat-icon class="mat-18">login</mat-icon>
             <span>Login</span>
@@ -45,6 +45,16 @@
             <span>Oportunidades</span>
           </a>
         </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item *ngIf="isLogged">
+          <a class="router" (click)="logout()">
+            <mat-icon class="mat-18">logout</mat-icon>
+            <span>Sair</span>
+          </a>
+        </mat-list-item>
+
       </mat-nav-list>
     </mat-sidenav>
 
