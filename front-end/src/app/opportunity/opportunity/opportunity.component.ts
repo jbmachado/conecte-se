@@ -31,13 +31,7 @@ export class OpportunityComponent implements OnInit {
     })
     this.tokenService.checkIsLogged();
 
-    this.opps$ = this.oppService.findAll()
-      .pipe(
-        catchError(err => {
-          console.log('Erro ao carregar oportunidades. \n' + err);
-          return of([]);
-        })
-      )
+    this.oppLoad();
   }
 
   addOpportunity() {
@@ -48,12 +42,22 @@ export class OpportunityComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe({
       next: (_) => {
-        // window.location.reload();
+        this.oppLoad();
       },
       error: (err) => {
         console.log(err);
       }
     });
+  }
+
+  private oppLoad(): void {
+    this.opps$ = this.oppService.findAll()
+      .pipe(
+        catchError(err => {
+          console.log('Erro ao carregar oportunidades. \n' + err);
+          return of([]);
+        })
+      )
   }
 
 }

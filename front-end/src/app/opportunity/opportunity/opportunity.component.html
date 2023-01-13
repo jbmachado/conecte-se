@@ -2,21 +2,19 @@
   <div fxLayoutAlign="center start">
     <mat-tab-group>
       <mat-tab label="Oportunidades">
-        <!--TODO carregar oportunidades-->
         <div *ngIf="opps$ | async as opps; else loading">
           <div *ngFor="let opp of opps">
-            <mat-card style="min-width: 450px; max-height: 200px; margin: 10px 0;">
-              <mat-card-header fxLayoutAlign="start start">
-                <mat-card-title-group>
-                  <mat-card-title>{{ opp.titulo }}</mat-card-title>
+            <mat-card style="min-width: 450px; max-height: 500px; margin: 10px 0;">
+              <mat-card-title-group>
+                <mat-card-title>{{ opp.titulo }}</mat-card-title>
 
-                  <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + opp.criador.sobrenome + " - " + opp.criador.mail + " - " + opp.criador.telefone}}</mat-card-subtitle>
-                </mat-card-title-group>
-              </mat-card-header>
+                <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + opp.criador.sobrenome + " - " +
+                  opp.criador.mail + " - " + opp.criador.telefone}}</mat-card-subtitle>
+              </mat-card-title-group>
 
               <mat-divider></mat-divider>
 
-              <mat-card-content style="padding: 5px;">
+              <mat-card-content style="padding: 5px; min-height: 70px;">
                 <div>
                   {{ opp.descricao }}
                 </div>
@@ -35,7 +33,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Minhas Oportunidades" *ngIf="!isLogged">
+      <mat-tab label="Minhas Oportunidades" *ngIf="isLogged">
         <!--TODO mostrar minhas oportunidades apenas quando usuário estiver logado-->
         <!--TODO mostrar campo apenas se usuário estiver logado-->
         <!--TODO carregar oportunidades do usuário logado-->
@@ -43,7 +41,7 @@
     </mat-tab-group>
   </div>
 
-  <div fxLayoutAlign="end end" *ngIf="isLogged">
+  <div style="display: flex; position: fixed;" *ngIf="isLogged">
     <button mat-mini-fab color="warn" (click)="addOpportunity()">
       <mat-icon>add</mat-icon>
     </button>
