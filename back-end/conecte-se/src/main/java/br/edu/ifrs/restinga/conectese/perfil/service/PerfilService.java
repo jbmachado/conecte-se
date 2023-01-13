@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.edu.ifrs.restinga.conectese.perfil.model.Perfil;
 import br.edu.ifrs.restinga.conectese.perfil.repository.PerfilRepository;
+import br.edu.ifrs.restinga.conectese.usuario.model.Usuario;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +16,29 @@ public class PerfilService {
     
     private final PerfilRepository perfilRepository;
     
-    public Perfil createPerfil(Perfil perfil) {
-        return perfilRepository.save(perfil);
+    public ResponseEntity<Perfil> createPerfil(Perfil perfil) {
+        return new ResponseEntity<Perfil>(perfilRepository.save(perfil), HttpStatus.CREATED);
     }
     
-    public ResponseEntity<Perfil> buscarPorNome(String nome) {
+    public ResponseEntity<?> buscarPorNome(String nome) {
         var perfil = perfilRepository.findByNome(nome);
         
         if (perfil.isPresent()) {
-            return ResponseEntity.ok(perfil.get());
+            return new ResponseEntity<Perfil>(perfil.get(), HttpStatus.OK);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("Perfil não encontrado", HttpStatus.NOT_FOUND);
     }
     
-    public ResponseEntity<Perfil> buscarPorId(Integer id) {
+    public ResponseEntity<?> buscarPorId(Integer id) {
         var perfil = perfilRepository.findById(id);
         
         if (perfil.isPresent()) {
-            return ResponseEntity.ok(perfil.get());
+            return new ResponseEntity<Perfil>(perfil.get(), HttpStatus.OK);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("Perfil não encontrado", HttpStatus.NOT_FOUND);
     }
     
-    public List<Perfil> buscarTodos() {
-        return perfilRepository.findAll();
+    public ResponseEntity<List<Perfil>> buscarTodos() {
+        return ResponseEntity.ok(perfilRepository.findAll());
     }
 }

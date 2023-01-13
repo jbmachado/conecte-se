@@ -27,9 +27,11 @@ export class AppComponent {
   constructor(userService: UserService){
     this.user$ = userService.getUser();
 
-    console.log(this.user$)
 
     this.user$.subscribe(user => {
+
+    console.log("Teste")
+    console.log(this.user)
       this.user = user})
   }
 }

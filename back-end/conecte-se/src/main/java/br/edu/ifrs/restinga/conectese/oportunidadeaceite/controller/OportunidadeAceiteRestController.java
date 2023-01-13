@@ -3,6 +3,7 @@ package br.edu.ifrs.restinga.conectese.oportunidadeaceite.controller;
 import br.edu.ifrs.restinga.conectese.oportunidadeaceite.model.OportunidadeAceita;
 import br.edu.ifrs.restinga.conectese.oportunidadeaceite.service.OportunidadeAceiteService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class OportunidadeAceiteRestController {
     private OportunidadeAceiteService service;
     
     @PostMapping(value = "/vincular")
-    public OportunidadeAceita vincularOportunidade(
+    public ResponseEntity<OportunidadeAceita> vincularOportunidade(
         @PathVariable
         Integer idOportunidade,
         @PathVariable

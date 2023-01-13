@@ -14,17 +14,17 @@ public class UsuarioRestController {
     private final UsuarioService service;
     
     @PostMapping(value = "/salvar")
-    public ResponseEntity<Usuario> salvarUsuario(
+    public ResponseEntity<?> salvarUsuario(
         @RequestBody
         @Validated
         Usuario usuario) {
         return service.salvarUsuario(usuario);
     }
     
-    @PatchMapping(value = "/alterarperfil/")
-    public ResponseEntity<Usuario> salvarUsuario(
-        @PathVariable Integer idUsuario,
-        @PathVariable Integer idPerfil) {
+    @PatchMapping(value = "/alterarperfil")
+    public ResponseEntity<?> salvarUsuario(
+        @RequestParam Integer idUsuario,
+        @RequestParam Integer idPerfil) {
         return service.alterarPerfil(idUsuario, idPerfil);
     }
 }

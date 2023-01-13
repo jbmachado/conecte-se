@@ -3,7 +3,9 @@ package br.edu.ifrs.restinga.conectese.oportunidade.service;
 import java.util.List;
 
 import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;
+import br.edu.ifrs.restinga.conectese.perfil.model.Perfil;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +15,20 @@ public class OportunidadeService {
     
     private final OportunidadeRepository oportunidadeRepository;
     
-    public Oportunidade salvarOportunidade(Oportunidade oportunidade) {
-        return oportunidadeRepository.save(oportunidade);
+    public ResponseEntity<Oportunidade> salvarOportunidade(Oportunidade oportunidade) {
+        return new ResponseEntity<Oportunidade>(oportunidadeRepository.save(oportunidade), HttpStatus.CREATED);
     }
     
-    public List<Oportunidade> buscarTodos() {
-        return oportunidadeRepository.findAll();
+    public ResponseEntity<List<Oportunidade>> buscarTodos() {
+        return ResponseEntity.ok(oportunidadeRepository.findAll());
     }
     
-    public ResponseEntity<Oportunidade> buscarPorId(Integer id) {
+    public ResponseEntity<?> buscarPorId(Integer id) {
         var oportunidade = oportunidadeRepository.findById(id);
     
         if (oportunidade.isPresent()) {
             return ResponseEntity.ok(oportunidade.get());
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("Oportunidade não encontrada", HttpStatus.NOT_FOUND);
     }
 }
