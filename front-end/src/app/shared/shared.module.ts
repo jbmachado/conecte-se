@@ -1,15 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AppMaterialModule } from './app-material/app-material.module';
-import { DateDdmmyyyyPipe } from './pipes/date-ddmmyyyy.pipe';
 
 @NgModule({
-  declarations: [
-    DateDdmmyyyyPipe
-  ],
+  declarations: [],
   imports: [CommonModule, AppMaterialModule],
-  exports: [
-    DateDdmmyyyyPipe
-  ],
+  exports: [],
 })
 export class SharedModule {}

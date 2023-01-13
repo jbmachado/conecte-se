@@ -18,7 +18,7 @@
       </mat-toolbar>
 
       <mat-card-content>
-        <form [formGroup]="form">
+        <form [formGroup]="form" (submit)="login()">
           <mat-form-field class="full-width">
             <mat-label>Email</mat-label>
 
@@ -42,14 +42,11 @@
               Campo obrigatório
             </mat-error>
           </mat-form-field>
-        </form>
-      </mat-card-content>
-
-      <mat-card-actions align="start">
-        <button [disabled]="!form.valid" mat-raised-button color="primary" (click)="onSubmit()">Logar</button>
+          <button [disabled]="!form.valid" mat-raised-button color="primary">Logar</button>
 
         <button mat-raised-button (click)="onRegister()">Cadastrar-se</button>
-      </mat-card-actions>
+        </form>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>

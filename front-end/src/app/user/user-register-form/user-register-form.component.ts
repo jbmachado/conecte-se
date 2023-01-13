@@ -5,7 +5,6 @@ import { NonNullableFormBuilder, UntypedFormGroup, Validators } from '@angular/f
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../service/auth.service';
 
-import { UserService } from '../service/user.service';
 import Validation from './util/validation';
 
 @Component({

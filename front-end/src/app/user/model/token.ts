@@ -1,4 +1,5 @@
+import { User } from './user';
 export interface Token {
-  token: string;
-  tipo: string;
+  iss: String;
+  user: User;
 }

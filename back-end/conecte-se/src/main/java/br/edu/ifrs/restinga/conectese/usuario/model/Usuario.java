@@ -29,7 +29,7 @@ public class Usuario implements UserDetails {
     private String avatar;
     private String nome;
     private String sobrenome;
-    private LocalDateTime dataCriacao;
+    //private LocalDateTime dataCriacao;
     private String telefone;
     private Boolean status;
     

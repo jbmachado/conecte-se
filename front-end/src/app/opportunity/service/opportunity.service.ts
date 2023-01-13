@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Opportunity } from '../model/opportunity';
-import { Observable, first, tap } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../../user/service/token.service';
 
@@ -12,14 +12,6 @@ export class OpportunityService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     /* TODO document why this constructor is empty */
-  }
-
-  findAll(): Observable<Opportunity[]> {
-    return this.http.get<Opportunity[]>(this.API + '/oportunidade/buscar')
-      .pipe(
-        first(),
-        tap(opps => console.log(opps))
-        );
   }
 
   register(opp: Partial<Opportunity>): Observable<Opportunity> {

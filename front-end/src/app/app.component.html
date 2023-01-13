@@ -11,6 +11,10 @@
 
 <mat-sidenav-container class="sidenav-container"><!-- TODO adicionar itens para navegação -->
     <mat-sidenav #sidenav class="sidenav" mode="over" align="start" [(opened)]="isMenuOpen" (click)="onSidenavClick()">
+      <div>
+        <i class="fa fa-user-circle"></i>
+        <a class="ml-2">{{ user.nome }}</a>
+    </div>
       <mat-nav-list>
         <mat-list-item>
           <a class="router" [routerLink]="'/'">
@@ -21,7 +25,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item *ngIf="!isLogged">
+        <mat-list-item>
           <a class="router" [routerLink]="'/user/register'">
             <mat-icon class="mat-18">assignment</mat-icon>
             <span>Cadastrar-se</span>
@@ -30,7 +34,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item *ngIf="!isLogged">
+        <mat-list-item>
           <a class="router" [routerLink]="'/user'">
             <mat-icon class="mat-18">login</mat-icon>
             <span>Login</span>
@@ -45,16 +49,6 @@
             <span>Oportunidades</span>
           </a>
         </mat-list-item>
-
-        <mat-divider></mat-divider>
-
-        <mat-list-item *ngIf="isLogged">
-          <a class="router" (click)="logout()">
-            <mat-icon class="mat-18">logout</mat-icon>
-            <span>Sair</span>
-          </a>
-        </mat-list-item>
-
       </mat-nav-list>
     </mat-sidenav>
 

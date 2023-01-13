@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
@@ -10,13 +9,14 @@ export class TokenService {
   private readonly TOKEN_KEY = 'auth-token';
   private readonly USER_KEY = 'auth-user';
 
-  private logged = new ReplaySubject<boolean>(1);
-  public isLogged = this.logged.asObservable();
-
   constructor() { }
 
   logout(): void {
     window.sessionStorage.clear();
+  }
+
+  hasToken(): Boolean{
+    return !!window.sessionStorage.getItem(this.TOKEN_KEY);
   }
 
   saveToken(token: string): void {
@@ -39,14 +39,5 @@ export class TokenService {
       return JSON.parse(user);
     }
     return null;
-  }
-
-  checkIsLogged() {
-    if (this.getToken()) {
-      this.logged.next(true);
-      return;
-    }
-
-    this.logged.next(false);
   }
 }

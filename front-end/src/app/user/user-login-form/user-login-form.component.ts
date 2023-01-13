@@ -38,22 +38,17 @@ export class UserLoginFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    //TODO ver possibilidade de back retornar dados do usuário. Talvez um getUser.
-    const user = this.form.value;
+  login(){
+    const login = this.form.get("mail")?.value;
+    const senha = this.form.get("senha")?.value;
 
-    this.authService.login(user).subscribe({
-      next: (data) => {
-        this.token.saveToken(data.token);
-        this.token.saveUser(user);
-
-        this.isLoggedIn = true;
-        window.location.reload(); //TODO trocar para perfil.
-      },
-      error: (err) => {
-        console.log(err); //TODO mensagem de erro
-      },
-    });
+    this.authService.authenticate(login, senha).subscribe(
+      () => this.router.navigateByUrl("/"),
+        err => {
+          console.log(err);
+          this.form.reset();
+        }
+    );
   }
 
   onRegister() {

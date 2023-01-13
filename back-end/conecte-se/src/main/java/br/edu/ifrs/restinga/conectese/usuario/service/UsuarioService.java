@@ -27,7 +27,7 @@ public class UsuarioService {
             usuario.setPerfils(List.of(perfil.getBody()));
         }
         if (!usuarioRepository.findByNameNotExist(usuario.getMail())) {
-            usuario.setDataCriacao(LocalDateTime.now());
+            //usuario.setDataCriacao(LocalDateTime.now());
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
         }
         else {

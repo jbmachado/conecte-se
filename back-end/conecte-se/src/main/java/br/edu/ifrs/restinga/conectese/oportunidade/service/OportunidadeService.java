@@ -1,6 +1,5 @@
 package br.edu.ifrs.restinga.conectese.oportunidade.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;
@@ -15,8 +14,6 @@ public class OportunidadeService {
     private final OportunidadeRepository oportunidadeRepository;
     
     public Oportunidade salvarOportunidade(Oportunidade oportunidade) {
-        oportunidade.setDataCriacao(LocalDateTime.now());
-        
         return oportunidadeRepository.save(oportunidade);
     }
     
