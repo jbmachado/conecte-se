@@ -3,7 +3,7 @@
     <mat-tab-group>
       <mat-tab label="Oportunidades">
         <div *ngIf="opps$ | async as opps; else loading">
-          <div *ngFor="let opp of opps">
+          <div *ngFor="let opp of opps!.slice().reverse()">
             <mat-card style="min-width: 450px; max-height: 200px; margin: 10px 0;">
               <mat-card-title-group>
                 <mat-card-title>{{ opp.titulo }}</mat-card-title>
