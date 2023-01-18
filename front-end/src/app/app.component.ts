@@ -49,10 +49,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.tokenService.logout();
-<<<<<<< HEAD
     window.location.reload();
-=======
->>>>>>> 1447f3b8c59ece65a9159851c8070bcd2d275b05
     this.router.navigate(['/']);
   }
 }
