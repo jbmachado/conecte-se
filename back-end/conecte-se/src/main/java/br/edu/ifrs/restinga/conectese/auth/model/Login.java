@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Login {
 
-    
     private String senha;
     private String login;
 }
