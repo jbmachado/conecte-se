@@ -6,6 +6,10 @@ import { TokenService } from '../../user/service/token.service';
 import { catchError, Observable, of } from 'rxjs';
 import { Opportunity } from '../model/opportunity';
 import { OpportunityService } from '../service/opportunity.service';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1447f3b8c59ece65a9159851c8070bcd2d275b05
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
@@ -56,5 +60,4 @@ export class OpportunityComponent implements OnInit {
         })
       )
   }
-
 }
