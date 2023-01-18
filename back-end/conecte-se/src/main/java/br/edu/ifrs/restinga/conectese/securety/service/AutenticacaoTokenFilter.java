@@ -31,10 +31,10 @@ public class AutenticacaoTokenFilter extends OncePerRequestFilter {
     }
     
     private void autenticarUsuario(String token) {
-        // var id = tokenService.getIdAdmin(token);
-        // var usuario = usuarioRepository.findById(id);
-        // UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(usuario,null,usuario.get().getPerfils());
-        // SecurityContextHolder.getContext().setAuthentication(user);
+        var id = tokenService.getIdAdmin(token);
+        var usuario = usuarioRepository.findById(id);
+        UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(usuario,null,usuario.get().getPerfils());
+        SecurityContextHolder.getContext().setAuthentication(user);
     }
     
     private String recuperarToken(HttpServletRequest request) {

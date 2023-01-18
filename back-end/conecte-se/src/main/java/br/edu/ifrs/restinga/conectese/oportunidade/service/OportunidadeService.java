@@ -15,7 +15,7 @@ public class OportunidadeService {
     private final OportunidadeRepository oportunidadeRepository;
     
     public Oportunidade salvarOportunidade(Oportunidade oportunidade) {
-        // oportunidade.setDataCriacao(LocalDateTime.now());
+        oportunidade.setDataCriacao(LocalDateTime.now());
         return oportunidadeRepository.save(oportunidade);
     }
     

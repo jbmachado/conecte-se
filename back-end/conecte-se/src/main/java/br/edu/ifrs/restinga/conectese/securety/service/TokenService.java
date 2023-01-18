@@ -21,6 +21,7 @@ public class TokenService {
         System.out.println("Testando");
         System.out.println(usuarioLogado);
         return Jwts.builder().setIssuer("conecte-se")
+            .setSubject(usuarioLogado.getId().toString())
             .claim("user", usuarioLogado)
             .setIssuedAt(data)
             .setExpiration(dataFinal)
