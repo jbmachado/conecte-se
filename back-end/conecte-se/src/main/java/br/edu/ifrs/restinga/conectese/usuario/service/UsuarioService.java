@@ -1,9 +1,6 @@
 package br.edu.ifrs.restinga.conectese.usuario.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-
+import br.edu.ifrs.restinga.conectese.perfil.model.Perfil;
 import br.edu.ifrs.restinga.conectese.perfil.service.PerfilService;
 import br.edu.ifrs.restinga.conectese.usuario.model.Usuario;
 import br.edu.ifrs.restinga.conectese.usuario.repository.UsuarioRepository;
@@ -13,52 +10,59 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UsuarioService {
-    
+
     private final UsuarioRepository usuarioRepository;
     private final PerfilService perfilService;
-    
-    public ResponseEntity<Usuario> salvarUsuario(Usuario usuario) {
+
+    public ResponseEntity<?> salvarUsuario(Usuario usuario) {
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getPassword()));
-        var perfil = perfilService.buscarPorNome("usuario");
-        if (!Objects.isNull(perfil.getBody())) {
-            usuario.setPerfils(List.of(perfil.getBody()));
+        var perfilResponseEntity = perfilService.buscarPorNome("usuario");
+        if (perfilResponseEntity.getStatusCode() != HttpStatus.NOT_FOUND) {
+            var perfil = (Perfil) perfilResponseEntity.getBody();
+            usuario.setPerfils(List.of(perfil));
         }
         if (!usuarioRepository.findByNameNotExist(usuario.getMail())) {
-            //usuario.setDataCriacao(LocalDateTime.now());
-            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
-        }
-        else {
-            usuario.setMail("");
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+//            usuario.setDataCriacao(LocalDateTime.now());
+            usuarioRepository.save(usuario);
+            return new ResponseEntity<Usuario>(usuario, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<String>("Email: " + usuario.getMail() +
+                                                    " já Cadastrado", HttpStatus.BAD_REQUEST);
         }
 
     }
-    
-    public ResponseEntity<Usuario> buscarPorId(Integer id) {
+
+    public ResponseEntity<?> buscarPorId(Integer id) {
         var usuario = usuarioRepository.findById(id);
-        
+
         if (usuario.isPresent()) {
-            return ResponseEntity.ok(usuario.get());
+            return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("Usuario não Encontrado. ", HttpStatus.NOT_FOUND);
     }
-    
-    public ResponseEntity<Usuario> alterarPerfil(Integer idUsuario, Integer idPerfil) {
-        var usuario = buscarPorId(idUsuario).getBody();
-        var perfil = perfilService.buscarPorId(idPerfil).getBody();
-        
-        if (Objects.isNull(usuario)) {
-            return ResponseEntity.notFound().build();
+
+    public ResponseEntity<?> alterarPerfil(Integer idUsuario, Integer idPerfil) {
+        var usuarioResponseEntity = buscarPorId(idUsuario);
+        var perfilResponseEntity = perfilService.buscarPorId(idPerfil);
+
+        if (usuarioResponseEntity.getStatusCode() == HttpStatus.NOT_FOUND) {
+            return usuarioResponseEntity;
         }
-        
-        if (Objects.isNull(perfil)) {
-            return ResponseEntity.notFound().build();
+
+        if (perfilResponseEntity.getStatusCode() == HttpStatus.NOT_FOUND) {
+            return perfilResponseEntity;
         }
-        
+
+        var usuario = (Usuario) usuarioResponseEntity.getBody();
+        var perfil = (Perfil) perfilResponseEntity.getBody();
+
         usuario.setPerfils(List.of(perfil));
-        return ResponseEntity.ok(usuario);
+
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 }

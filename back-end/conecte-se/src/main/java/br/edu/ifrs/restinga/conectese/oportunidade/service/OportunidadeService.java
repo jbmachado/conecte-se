@@ -3,7 +3,10 @@ package br.edu.ifrs.restinga.conectese.oportunidade.service;
 import java.util.List;
 
 import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;
+import br.edu.ifrs.restinga.conectese.usuario.model.Usuario;
+import br.edu.ifrs.restinga.conectese.usuario.service.UsuarioService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +15,31 @@ import org.springframework.stereotype.Service;
 public class OportunidadeService {
     
     private final OportunidadeRepository oportunidadeRepository;
+    private final UsuarioService usuarioService;
     
-    public Oportunidade salvarOportunidade(Oportunidade oportunidade) {
-        return oportunidadeRepository.save(oportunidade);
+    public ResponseEntity<?> salvarOportunidade(Oportunidade oportunidade) {
+        var usuarioResponseEntity = usuarioService.buscarPorId(oportunidade.getCriador().getId());
+
+        if(usuarioResponseEntity.getStatusCode() == HttpStatus.NOT_FOUND){
+            return usuarioResponseEntity;
+        }
+
+        var usuario = (Usuario) usuarioResponseEntity.getBody();
+        oportunidade.setCriador(usuario);
+
+        return new ResponseEntity<Oportunidade>(oportunidadeRepository.save(oportunidade), HttpStatus.CREATED);
     }
     
-    public List<Oportunidade> buscarTodos() {
-        return oportunidadeRepository.findAll();
+    public ResponseEntity<List<Oportunidade>> buscarTodos() {
+        return ResponseEntity.ok(oportunidadeRepository.findAll());
     }
     
-    public ResponseEntity<Oportunidade> buscarPorId(Integer id) {
+    public ResponseEntity<?> buscarPorId(Integer id) {
         var oportunidade = oportunidadeRepository.findById(id);
     
         if (oportunidade.isPresent()) {
-            return ResponseEntity.ok(oportunidade.get());
+            return new ResponseEntity<Oportunidade>(oportunidade.get(), HttpStatus.OK);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<String>("O portunidade id" + oportunidade.get().getId() + " nao existe", HttpStatus.NOT_FOUND);
     }
 }

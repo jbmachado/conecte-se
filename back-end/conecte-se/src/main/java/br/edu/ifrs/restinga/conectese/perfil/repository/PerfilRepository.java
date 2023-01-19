@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
-    Optional<Perfil> findByNome(String nomeid);
+    Optional<Perfil> findByNome(String nome);
 }

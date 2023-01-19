@@ -1,6 +1,7 @@
+import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class TokenService {
   private logged = new ReplaySubject<boolean>(1);
   public isLogged = this.logged.asObservable();
 
-  constructor() { }
+  constructor(
+    
+  ) { }
 
   logout(): void {
     window.sessionStorage.clear();

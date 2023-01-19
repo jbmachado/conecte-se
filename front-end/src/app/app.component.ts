@@ -34,9 +34,9 @@ export class AppComponent implements OnInit {
     ){
     this.user$ = userService.getUser();
 
-    console.log(this.user$)
 
     this.user$.subscribe(user => {
+
       this.user = user})
   }
 
