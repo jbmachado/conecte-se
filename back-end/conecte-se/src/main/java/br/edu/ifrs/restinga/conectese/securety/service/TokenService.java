@@ -1,8 +1,12 @@
 package br.edu.ifrs.restinga.conectese.securety.service;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
+import br.edu.ifrs.restinga.conectese.auth.model.TokenRequest;
 import br.edu.ifrs.restinga.conectese.usuario.model.Usuario;
+import com.google.gson.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,8 +22,8 @@ public class TokenService {
         var data = new Date();
         var dataFinal = new Date(data.getTime() + Long.parseLong("5000000000000"));
         var usuarioLogado = (Usuario) authentication.getPrincipal();
-        System.out.println("Testando");
-        System.out.println(usuarioLogado);
+
+
         return Jwts.builder().setIssuer("conecte-se")
             .setSubject(usuarioLogado.getId().toString())
             .claim("user", usuarioLogado)
@@ -41,6 +45,11 @@ public class TokenService {
 
     public Integer getIdAdmin(String token) {
         Claims claims = Jwts.parser().setSigningKey("testando").parseClaimsJws(token).getBody();
-        return Integer.parseInt(claims.getSubject());
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) ->
+                ZonedDateTime.parse(json.getAsJsonPrimitive().getAsString()).toLocalDateTime()).create();
+        var jsonClaims = gson.toJson(claims);
+        var tokenRequest = gson.fromJson(jsonClaims, TokenRequest.class);
+        System.out.println(tokenRequest);
+        return tokenRequest.getUser().getId();
     }
 }

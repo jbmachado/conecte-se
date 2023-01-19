@@ -17,8 +17,8 @@ import org.springframework.security.core.GrantedAuthority;
 public class Perfil implements GrantedAuthority {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
     @NotNull
     private String nome;
     

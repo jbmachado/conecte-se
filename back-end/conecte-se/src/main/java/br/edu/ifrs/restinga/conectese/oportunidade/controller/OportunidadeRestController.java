@@ -17,7 +17,7 @@ public class OportunidadeRestController {
     private final OportunidadeService service;
     
     @PostMapping(value = "/salvar")
-    public Oportunidade salvarOportunidade(
+    public ResponseEntity<?> salvarOportunidade(
         @RequestBody
         @Validated
         Oportunidade oportunidade) {
@@ -25,12 +25,12 @@ public class OportunidadeRestController {
     }
     
     @GetMapping(value = "/buscar")
-    public List<Oportunidade> buscarTodos() {
+    public ResponseEntity<List<Oportunidade>> buscarTodos() {
         return service.buscarTodos();
     }
     
     @GetMapping(value = "/buscar/{id}")
-    public ResponseEntity<Oportunidade> buscarPor(
+    public ResponseEntity<?> buscarPor(
         @PathVariable Integer id
     ) {
         return service.buscarPorId(id);
