@@ -1,3 +1,5 @@
+import { User } from './../../user/model/user';
+import { UserService } from './../../user/service/user.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,13 +16,24 @@ import { OpportunityService } from '../service/opportunity.service';
 export class OpportunityComponent implements OnInit {
   isLogged: boolean = false;
   opps$: Observable<Opportunity[]> | null = null;
+  user: User = {id: 0,
+    senha: "",
+    mail: "",
+    telefone: "",
+    nome: "",
+    sobrenome: ""};
 
   constructor(
     public dialog: MatDialog,
     public location: Location,
     private tokenService: TokenService,
-    private oppService: OpportunityService
-  ) { }
+    private oppService: OpportunityService,
+    private UserService: UserService
+  ) {
+    this.UserService.getUser().subscribe(
+      (data) => this.user = data
+    );
+  }
 
   ngOnInit(): void {
     this.tokenService.isLogged.subscribe(log => {
@@ -55,5 +68,10 @@ export class OpportunityComponent implements OnInit {
           return of([]);
         })
       )
+  }
+
+  public oppIsOpen(opp: Opportunity, user: User): boolean {
+    // PROBLEMA
+    return this.oppService.podeAceitarOportunidade(opp, user);
   }
 }

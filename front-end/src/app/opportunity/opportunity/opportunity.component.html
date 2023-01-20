@@ -10,6 +10,10 @@
 
                 <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + opp.criador.sobrenome + " - " +
                   opp.criador.mail }}</mat-card-subtitle>
+
+                <div *ngIf="isLogged">
+                  <button mat-button>Aceitar</button>
+                </div>
               </mat-card-title-group>
 
               <mat-divider></mat-divider>
