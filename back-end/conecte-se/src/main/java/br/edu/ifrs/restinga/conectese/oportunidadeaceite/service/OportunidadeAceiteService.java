@@ -37,6 +37,7 @@ public class OportunidadeAceiteService {
         var oportunidade = (Oportunidade) oportunidadeReponseEntity.getBody();
         var usuario = (Usuario) usuarioReponseEntity.getBody();
 
+        
         OportunidadeAceita oportunidadeAceita = new OportunidadeAceita();
         oportunidadeAceita.setOportunidade(oportunidade);
         oportunidadeAceita.setUsuario(usuario);

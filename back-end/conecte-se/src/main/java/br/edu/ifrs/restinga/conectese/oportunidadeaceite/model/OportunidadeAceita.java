@@ -26,6 +26,7 @@ public class OportunidadeAceita {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)    
     private Long id;
+    @JsonIgnore
     @Getter
     @Setter
     private LocalDateTime dataAceite;

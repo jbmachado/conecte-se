@@ -36,6 +36,7 @@ export class OpportunityComponent implements OnInit {
     private UserService: UserService
   ) {
     this.UserService.getUser().subscribe((data) => (this.user = data));
+    console.log(this.user);
   }
 
   ngOnInit(): void {
@@ -81,10 +82,13 @@ export class OpportunityComponent implements OnInit {
   }
 
   isAccepted(opp: Opportunity): boolean {
+    // this.user.oportunidadeAceitas?.indexOf()
     return false;
   }
 
   private oppLoad(): void {
+    this.oppUser = [];
+
     this.opps$ = this.oppService.findAll().pipe(
       catchError((err) => {
         console.log('Erro ao carregar oportunidades. \n' + err);

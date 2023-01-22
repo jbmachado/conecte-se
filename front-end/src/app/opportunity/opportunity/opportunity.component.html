@@ -37,10 +37,8 @@
           </div>
         </div>
       </mat-tab>
+      
       <mat-tab label="Minhas Oportunidades" *ngIf="isLogged && oppUser.length > 0">
-        <!--TODO mostrar minhas oportunidades apenas quando usuário estiver logado-->
-        <!--TODO mostrar campo apenas se usuário estiver logado-->
-        <!--TODO carregar oportunidades do usuário logado-->
         <div *ngIf="oppUser as opps; else loading">
           <div *ngFor="let opp of opps!.slice().reverse()">
             <mat-card style="min-width: 450px; max-height: 200px; margin: 10px 0;">
