@@ -11,9 +11,11 @@
                 <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + " " + opp.criador.sobrenome + " - " +
                   opp.criador.mail }}</mat-card-subtitle>
 
-                <div *ngIf="isLogged && isOppCreatorIsNotLoggedUser(opp); else criado">
-                  <div *ngIf="(!isAccepted(opp)); else vinculado">
-                    <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
+                <div *ngIf="isLogged">
+                  <div *ngIf="isOppCreatorIsNotLoggedUser(opp); else criado">
+                    <div *ngIf="(!isAccepted(opp)); else vinculado">
+                      <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
+                    </div>
                   </div>
 
                   <ng-template #vinculado>
