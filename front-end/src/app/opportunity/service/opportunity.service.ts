@@ -5,6 +5,7 @@ import { Opportunity } from '../model/opportunity';
 import { Observable, first, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../../user/service/token.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,23 @@ export class OpportunityService {
     return opp.criador!.id != user!.id;
   }
 
+  linkOpp(idOpp: number): Observable<any> {
+    let user: User;
+
+    this.userService.getUser().subscribe(
+      (data) => user = data
+    );
+
+    return this.http
+      .post<any>(this.API + '/oportunidadeaceite/vincular', {}, {
+        params: {
+          idOportunidade: idOpp,
+          idUsuario: user!.id
+        }
+      })
+      .pipe(first());
+  }
+
   register(opp: Partial<Opportunity>): Observable<Opportunity> {
     this.userService.getUser().subscribe(
       (data) => opp.criador = data
@@ -46,4 +64,5 @@ export class OpportunityService {
       .post<Opportunity>(this.API + '/oportunidade/salvar', opp)
       .pipe(first());
   }
+
 }

@@ -8,6 +8,7 @@ import { TokenService } from '../../user/service/token.service';
 import { catchError, Observable, of } from 'rxjs';
 import { Opportunity } from '../model/opportunity';
 import { OpportunityService } from '../service/opportunity.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
@@ -28,6 +29,7 @@ export class OpportunityComponent implements OnInit {
     public location: Location,
     private tokenService: TokenService,
     private oppService: OpportunityService,
+    private snackBar: MatSnackBar,
     private UserService: UserService
   ) {
     this.UserService.getUser().subscribe(
@@ -60,6 +62,19 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
+  linkOportunityUser(idOpp: number) {
+    this.oppService.linkOpp(idOpp).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.onSuccess();
+      },
+      error: (err) => {
+        console.log(err);
+        this.onError();
+      }
+    });
+  }
+
   private oppLoad(): void {
     this.opps$ = this.oppService.findAll()
       .pipe(
@@ -70,8 +85,11 @@ export class OpportunityComponent implements OnInit {
       )
   }
 
-  public oppIsOpen(opp: Opportunity, user: User): boolean {
-    // PROBLEMA
-    return this.oppService.podeAceitarOportunidade(opp, user);
+  private onSuccess() {
+    this.snackBar.open('Vínculo criado!', 'Ok', { duration: 5000 });
+  }
+
+  private onError() {
+    this.snackBar.open('Erro ao tentar vincular.', 'Ok', { duration: 5000 });
   }
 }

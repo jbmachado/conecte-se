@@ -12,7 +12,7 @@
                   opp.criador.mail }}</mat-card-subtitle>
 
                 <div *ngIf="isLogged">
-                  <button mat-button>Aceitar</button>
+                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
                 </div>
               </mat-card-title-group>
 

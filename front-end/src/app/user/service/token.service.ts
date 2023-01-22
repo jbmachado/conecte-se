@@ -15,7 +15,7 @@ export class TokenService {
   public isLogged = this.logged.asObservable();
 
   constructor(
-    
+
   ) { }
 
   logout(): void {
@@ -35,18 +35,18 @@ export class TokenService {
     return window.sessionStorage.getItem(this.TOKEN_KEY);
   }
 
-  saveUser(user: User): void {
-    window.sessionStorage.removeItem(this.USER_KEY);
-    window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
-  }
+  // saveUser(user: User): void {
+  //   window.sessionStorage.removeItem(this.USER_KEY);
+  //   window.sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
+  // }
 
-  getUser(): User | null {
-    const user = window.sessionStorage.getItem(this.USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-    return null;
-  }
+  // getUser(): User | null {
+  //   const user = window.sessionStorage.getItem(this.USER_KEY);
+  //   if (user) {
+  //     return JSON.parse(user);
+  //   }
+  //   return null;
+  // }
 
   checkIsLogged() {
     if (this.getToken()) {
