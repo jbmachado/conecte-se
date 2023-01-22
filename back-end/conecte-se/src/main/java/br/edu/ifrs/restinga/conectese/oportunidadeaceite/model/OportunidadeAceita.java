@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.edu.ifrs.restinga.conectese.oportunidade.model.Oportunidade;

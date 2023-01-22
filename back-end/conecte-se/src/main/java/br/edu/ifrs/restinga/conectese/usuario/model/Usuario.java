@@ -14,6 +14,8 @@ import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Table
@@ -21,10 +23,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements UserDetails {
+    @PostLoad
+    private void postLoad() {
+        oportunidadesAceitasIds = oportunidadeAceitas.stream().map((data) -> data.getOportunidade().getId()).collect(Collectors.toSet());
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Transient
+    private Set<Integer> oportunidadesAceitasIds;
 
     @Email
     private String mail;

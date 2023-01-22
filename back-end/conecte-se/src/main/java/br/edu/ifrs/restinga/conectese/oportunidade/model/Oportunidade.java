@@ -2,6 +2,9 @@ package br.edu.ifrs.restinga.conectese.oportunidade.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.persistence.*;
 
 import br.edu.ifrs.restinga.conectese.oportunidadeaceite.model.OportunidadeAceita;
@@ -16,11 +19,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Oportunidade {
-    
+    @PostLoad
+    private void postLoad() {
+        usuarioAceitosIds = oportunidadeAceitas.stream().map((data) -> data.getUsuario().getId()).collect(Collectors.toSet());
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     
+    @Transient
+    private Set<Integer> usuarioAceitosIds;
+
     @OneToOne
     private Usuario criador;
     private String titulo;
