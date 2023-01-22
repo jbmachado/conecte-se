@@ -1,3 +1,5 @@
+import { Opportunity } from '../../opportunity/model/opportunity';
+import { OportunidadeAceitas } from '../../opportunity/model/oportunidade-aceitas';
 export interface User {
   id: number;
   senha: string;
@@ -5,4 +7,5 @@ export interface User {
   telefone: string;
   nome: string;
   sobrenome: string;
+  oportunidadeAceitas?: OportunidadeAceitas[];
 }

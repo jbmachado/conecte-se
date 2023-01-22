@@ -21,22 +21,22 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OportunidadeAceita {
     
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)    
     @Getter
     @Setter
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)    
     private Long id;
     @Getter
     @Setter
     private LocalDateTime dataAceite;
     @JsonIgnore
-    @ManyToOne
     @Getter
     @Setter
+    @ManyToOne
     private Usuario usuario;
     @JsonIgnore
-    @ManyToOne
     @Getter
     @Setter
+    @ManyToOne
     private Oportunidade oportunidade;
 }

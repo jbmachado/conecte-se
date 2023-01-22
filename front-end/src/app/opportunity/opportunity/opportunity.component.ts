@@ -12,17 +12,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
-  styleUrls: ['./opportunity.component.scss']
+  styleUrls: ['./opportunity.component.scss'],
 })
 export class OpportunityComponent implements OnInit {
   isLogged: boolean = false;
   opps$: Observable<Opportunity[]> | null = null;
-  user: User = {id: 0,
-    senha: "",
-    mail: "",
-    telefone: "",
-    nome: "",
-    sobrenome: ""};
+  oppUser: Opportunity[] = [];
+  user: User = {
+    id: 0,
+    senha: '',
+    mail: '',
+    telefone: '',
+    nome: '',
+    sobrenome: '',
+  };
 
   constructor(
     public dialog: MatDialog,
@@ -32,15 +35,13 @@ export class OpportunityComponent implements OnInit {
     private snackBar: MatSnackBar,
     private UserService: UserService
   ) {
-    this.UserService.getUser().subscribe(
-      (data) => this.user = data
-    );
+    this.UserService.getUser().subscribe((data) => (this.user = data));
   }
 
   ngOnInit(): void {
-    this.tokenService.isLogged.subscribe(log => {
+    this.tokenService.isLogged.subscribe((log) => {
       this.isLogged = log;
-    })
+    });
     this.tokenService.checkIsLogged();
 
     this.oppLoad();
@@ -49,7 +50,7 @@ export class OpportunityComponent implements OnInit {
   addOpportunity() {
     const dialogRef = this.dialog.open(OpportunityFormDialogComponent, {
       minWidth: '500px',
-      maxHeight: '1000px'
+      maxHeight: '1000px',
     });
 
     dialogRef.afterClosed().subscribe({
@@ -58,7 +59,7 @@ export class OpportunityComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -71,18 +72,33 @@ export class OpportunityComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.onError();
-      }
+      },
     });
   }
 
+  isOppCreatorIsLoggedUser(opp: Opportunity): boolean {
+    return opp.criador?.id != this.user.id;
+  }
+
+  isAccepted(opp: Opportunity): boolean {
+    return false;
+  }
+
   private oppLoad(): void {
-    this.opps$ = this.oppService.findAll()
-      .pipe(
-        catchError(err => {
-          console.log('Erro ao carregar oportunidades. \n' + err);
-          return of([]);
-        })
-      )
+    this.opps$ = this.oppService.findAll().pipe(
+      catchError((err) => {
+        console.log('Erro ao carregar oportunidades. \n' + err);
+        return of([]);
+      })
+    );
+
+    this.opps$.subscribe({
+      next: (data) => {
+        data.forEach((opp) => {
+          if (opp.criador!.id == this.user.id) this.oppUser?.push(opp);
+        });
+      },
+    });
   }
 
   private onSuccess() {

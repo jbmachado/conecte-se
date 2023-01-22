@@ -8,11 +8,11 @@
               <mat-card-title-group>
                 <mat-card-title>{{ opp.titulo }}</mat-card-title>
 
-                <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + opp.criador.sobrenome + " - " +
+                <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + " " + opp.criador.sobrenome + " - " +
                   opp.criador.mail }}</mat-card-subtitle>
 
-                <div *ngIf="isLogged">
-                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
+                <div *ngIf="isLogged && isOppCreatorIsLoggedUser(opp)">
+                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)" [disabled]="isAccepted(opp)">Aceitar</button>
                 </div>
               </mat-card-title-group>
 
@@ -37,10 +37,44 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Minhas Oportunidades" *ngIf="isLogged">
+      <mat-tab label="Minhas Oportunidades" *ngIf="isLogged && oppUser.length > 0">
         <!--TODO mostrar minhas oportunidades apenas quando usuário estiver logado-->
         <!--TODO mostrar campo apenas se usuário estiver logado-->
         <!--TODO carregar oportunidades do usuário logado-->
+        <div *ngIf="oppUser as opps; else loading">
+          <div *ngFor="let opp of opps!.slice().reverse()">
+            <mat-card style="min-width: 450px; max-height: 200px; margin: 10px 0;">
+              <mat-card-title-group>
+                <mat-card-title>{{ opp.titulo }}</mat-card-title>
+
+                <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + " " + opp.criador.sobrenome + " - " +
+                  opp.criador.mail }}</mat-card-subtitle>
+
+                <div *ngIf="isLogged && isOppCreatorIsLoggedUser(opp)">
+                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)" [disabled]="isAccepted(opp)">Aceitar</button>
+                </div>
+              </mat-card-title-group>
+
+              <mat-divider></mat-divider>
+
+              <mat-card-content style="padding: 5px; min-height: 70px;">
+                <div>
+                  {{ opp.descricao }}
+                </div>
+              </mat-card-content>
+
+              <mat-divider></mat-divider>
+
+              <mat-card-footer style="padding: 5px;">
+                <div fxLayoutAlign="space-between end">
+                  <span>{{ opp.endereco }} </span>
+
+                  <span>{{ (opp.dataCriacao | dateDdmmyyyy) + " - " + (opp.validade | dateDdmmyyyy) }}</span>
+                </div>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
