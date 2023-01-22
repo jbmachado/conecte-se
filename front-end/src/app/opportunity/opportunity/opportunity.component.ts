@@ -68,6 +68,7 @@ export class OpportunityComponent implements OnInit {
     this.oppService.linkOpp(idOpp).subscribe({
       next: (res) => {
         console.log(res);
+        window.location.reload();
         this.onSuccess();
       },
       error: (err) => {
@@ -77,13 +78,14 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
-  isOppCreatorIsLoggedUser(opp: Opportunity): boolean {
+  isOppCreatorIsNotLoggedUser(opp: Opportunity): boolean {
     return opp.criador?.id != this.user.id;
   }
 
   isAccepted(opp: Opportunity): boolean {
-    // this.user.oportunidadeAceitas?.indexOf()
-    return false;
+    const r = opp.usuarioAceitosIds.find((data) => data == this.user.id);
+
+    return r !== undefined;
   }
 
   private oppLoad(): void {
@@ -99,7 +101,9 @@ export class OpportunityComponent implements OnInit {
     this.opps$.subscribe({
       next: (data) => {
         data.forEach((opp) => {
-          if (opp.criador!.id == this.user.id) this.oppUser?.push(opp);
+          if (opp.criador!.id == this.user.id || this.isAccepted(opp)) {
+            this.oppUser?.push(opp);
+          }
         });
       },
     });

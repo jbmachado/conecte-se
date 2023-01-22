@@ -1,7 +1,6 @@
 import { User } from '../../user/model/user';
 export interface Opportunity {
   //TODO lista de imagem
-  //TODO oportunidade aceitas
   id: number;
   criador: User | null;
   titulo: string;
@@ -12,4 +11,5 @@ export interface Opportunity {
   valor: string;
   validade: string;
   categoria: string;
+  usuarioAceitosIds: number[];
 }

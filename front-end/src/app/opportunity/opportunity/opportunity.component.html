@@ -11,9 +11,20 @@
                 <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + " " + opp.criador.sobrenome + " - " +
                   opp.criador.mail }}</mat-card-subtitle>
 
-                <div *ngIf="isLogged && isOppCreatorIsLoggedUser(opp)">
-                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)" [disabled]="isAccepted(opp)">Aceitar</button>
+                <div *ngIf="isLogged && isOppCreatorIsNotLoggedUser(opp); else criado">
+                  <div *ngIf="(!isAccepted(opp)); else vinculado">
+                    <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
+                  </div>
+
+                  <ng-template #vinculado>
+                    <mat-icon class="mat-18">done</mat-icon>
+                  </ng-template>
                 </div>
+
+                <ng-template #criado>
+                  <mat-icon class="mat-18">star</mat-icon>
+                </ng-template>
+
               </mat-card-title-group>
 
               <mat-divider></mat-divider>
@@ -37,7 +48,7 @@
           </div>
         </div>
       </mat-tab>
-      
+
       <mat-tab label="Minhas Oportunidades" *ngIf="isLogged && oppUser.length > 0">
         <div *ngIf="oppUser as opps; else loading">
           <div *ngFor="let opp of opps!.slice().reverse()">
@@ -48,9 +59,13 @@
                 <mat-card-subtitle *ngIf="opp.criador">{{ opp.criador.nome + " " + opp.criador.sobrenome + " - " +
                   opp.criador.mail }}</mat-card-subtitle>
 
-                <div *ngIf="isLogged && isOppCreatorIsLoggedUser(opp)">
-                  <button mat-button color="primary" (click)="linkOportunityUser(opp.id)" [disabled]="isAccepted(opp)">Aceitar</button>
+                <div *ngIf="isAccepted(opp); else criado">
+                  <mat-icon class="mat-18">done</mat-icon>
                 </div>
+
+                <ng-template #criado>
+                  <mat-icon class="mat-18">star</mat-icon>
+                </ng-template>
               </mat-card-title-group>
 
               <mat-divider></mat-divider>
