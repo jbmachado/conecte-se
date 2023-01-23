@@ -14,17 +14,19 @@
                 <div *ngIf="isLogged">
                   <div *ngIf="isOppCreatorIsNotLoggedUser(opp); else criado">
                     <div *ngIf="(!isAccepted(opp)); else vinculado">
-                      <button mat-button color="primary" (click)="linkOportunityUser(opp.id)">Aceitar</button>
+                      <button mat-icon-button color="primary" (click)="linkOportunityUser(opp.id)" style="opacity: 0.6;">
+                        <mat-icon class="mat-18">add_circle</mat-icon>
+                      </button>
                     </div>
                   </div>
 
                   <ng-template #vinculado>
-                    <mat-icon class="mat-18">done</mat-icon>
+                    <mat-icon class="mat-18" color="primary">check_circle</mat-icon>
                   </ng-template>
                 </div>
 
                 <ng-template #criado>
-                  <mat-icon class="mat-18">star</mat-icon>
+                  <mat-icon class="mat-18" color="accent">account_circle</mat-icon>
                 </ng-template>
 
               </mat-card-title-group>
@@ -62,11 +64,11 @@
                   opp.criador.mail }}</mat-card-subtitle>
 
                 <div *ngIf="isAccepted(opp); else criado">
-                  <mat-icon class="mat-18">done</mat-icon>
+                  <mat-icon class="mat-18" color="primary">check_circle</mat-icon>
                 </div>
 
                 <ng-template #criado>
-                  <mat-icon class="mat-18">star</mat-icon>
+                  <mat-icon class="mat-18" color="accent">account_circle</mat-icon>
                 </ng-template>
               </mat-card-title-group>
 

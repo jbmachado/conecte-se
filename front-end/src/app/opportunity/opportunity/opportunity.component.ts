@@ -68,7 +68,7 @@ export class OpportunityComponent implements OnInit {
     this.oppService.linkOpp(idOpp).subscribe({
       next: (res) => {
         console.log(res);
-        window.location.reload();
+        this.oppLoad();
         this.onSuccess();
       },
       error: (err) => {
